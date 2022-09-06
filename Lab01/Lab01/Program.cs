@@ -23,6 +23,21 @@
             Console.WriteLine(booleanValue + "\t" + byteValue + "\t" + sbyteValue + "\t" + charValue + "\t" + decimalValue + "\t" + doubleValue +
                 "\t" + floatValue + "\t" + intValue + "\t" + uintValue + "\t" + nintValue + "\t" + nuintValue + "\t" + longValue + "\t" + ulongValue + "\t" +
                 shortValue + "\t" + ushortValue);
+            //1-b
+            byteValue = Convert.ToByte(booleanValue);
+            Console.WriteLine(byteValue);
+
+            charValue = Convert.ToChar(ulongValue);
+            Console.WriteLine(charValue);
+
+            doubleValue = Convert.ToDouble(floatValue);
+            Console.WriteLine(doubleValue);
+
+            floatValue = Convert.ToSingle(floatValue);
+            Console.WriteLine(floatValue);
+
+            intValue = Convert.ToInt32(longValue);
+            Console.WriteLine(intValue);
         }
     }
 }
