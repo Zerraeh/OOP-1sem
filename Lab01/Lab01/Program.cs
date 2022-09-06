@@ -106,6 +106,27 @@ namespace Lab01
             sb.Insert(0, "start");
             sb.AppendFormat("abc", sb);
             Console.WriteLine(sb);
+            var rand = new Random();
+
+            //3 - a
+            int[,] arrayMatrix = new int[5, 5];
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    arrayMatrix[i,j] = rand.Next();
+                    Console.Write($"{arrayMatrix[i, j]}\t");
+                }
+                Console.WriteLine();
+            }
+
+            //3 - b
+            string[] strArray = new string[] {"abc", "def", "ghi", "jkl", "mno","pqrst", "uvw"};
+            for (int i = 0; i < strArray.Length; i++)
+            {
+                Console.Write(strArray[i]);
+            }
+
 
         }
     }
