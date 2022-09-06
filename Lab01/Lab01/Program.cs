@@ -56,6 +56,40 @@
             q = 'a';
             //а где ошибка то потерялась?
 
+
+            //2-a
+            const string str1 = "надоела эта лабораторная, какая же она скучная, лучше бы сделали покороче, чем это всё протыкивать";
+            const string str2 = "согласен со сказанным выше (c)моя шизофрения";
+            if(str1 == str2)
+            {
+                Console.WriteLine(str1 , str2);
+            }
+
+            //2-b
+            string firstStr = "aaa,";
+            string secondStr = "bbb,";
+            string thirdStr = "ccc,";
+            string sumStr = firstStr + secondStr + thirdStr;
+            Console.WriteLine(sumStr);
+            firstStr = String.Copy(secondStr);
+            Console.WriteLine(firstStr);
+            string firstword = sumStr.Substring(0, sumStr.IndexOf(','));
+            string txt = "Вот так вот и вышло";
+            string[] words = txt.Split(new char[] { ' ' });
+            foreach(string s in words)
+            {
+                Console.WriteLine(s);
+            }
+            sumStr = sumStr.Insert(3, firstword);
+
+            Console.Write("Введите подстроку: ");
+            string substr = Console.ReadLine();
+            sumStr = sumStr.Replace(substr, "");
+            Console.WriteLine(sumStr);
+
+            long phoneNum = 80296665544;
+            Console.WriteLine($"{phoneNum: #### ### ## ##}");
+            
         }
     }
 }
