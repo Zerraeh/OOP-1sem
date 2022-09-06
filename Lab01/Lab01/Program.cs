@@ -47,7 +47,13 @@
             var samoVar = "Самовар";
             var intVar = 55;
             Console.WriteLine($"Интовский вар: {intVar} , samoVar: {samoVar}, Контеканация(как пример работы с ними): {intVar + samoVar}");
+            // 1-e
+            int? nullable = null;
 
+            //1-f
+            var q = 5;
+            q = 'a';
+            //а где ошибка то потерялась?
         }
     }
 }
