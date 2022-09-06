@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Lab01
 {
@@ -172,7 +174,54 @@ namespace Lab01
             
 
             //--5
+            (int, int, int, string)func(int[] arr, string str)
+            {
+                int max= int.MinValue;
+                int min = int.MaxValue;
+                int sum = 0;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (max < arr[i])
+                    {
+                        max = arr[i];
+                    }
+                    else
+                    {
+                        if (min > arr[i]) {
+                            min = arr[i]; 
+                        }
+                    }
+                    sum += arr[i];
+                }
+                string returnStr = str.Substring(0,1);
+                return (min,max, sum, returnStr);
+            }
+            int[] arrayForFunc = { 1, 2, 3 };
+            string strForFunc = "monke";
+            (int, int, int, string) tupleFunky = func(arrayForFunc,strForFunc);
+            Console.WriteLine(tupleFunky.Item4);
 
+
+            //6
+
+            void funcforchecked()
+            {
+                checked
+                {
+                    int maxint = int.MaxValue;
+                }
+            }
+            void funcforunchecked()
+            {
+                unchecked
+                {
+                    int maxint = int.MaxValue;
+                }
+            }
+            funcforchecked();
+            funcforunchecked();
+
+            
         }
     }
 }
