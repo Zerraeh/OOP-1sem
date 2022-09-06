@@ -148,8 +148,30 @@ namespace Lab01
             var strVar = "stroka";
             var arrayforVar = new int[] { 1, 2, 3 };
             
+            //4
+            (int firstC, string secondC, char thirdC, string fourthC,ulong fivesC)cortage = (1, "strstrstr", 'c', "strstr2", 18446744073709551615);
+            Console.WriteLine(cortage.Item1);
+            Console.WriteLine(cortage.Item3);
+            Console.WriteLine(cortage.Item4);
+
+            var someString = string.Empty;
+            var someInt = 0;
+            var tuple = ("someString", 5);
+            (someString, someInt) = tuple;
 
 
+            var tuple2 = ("someStr", 5);
+            var (stringsss, intsss) = tuple2;
+
+
+            //c
+            var _ = 5;
+            Console.WriteLine(_);
+            //d
+            Console.WriteLine(tuple != tuple2); //true
+            
+
+            //--5
 
         }
     }
