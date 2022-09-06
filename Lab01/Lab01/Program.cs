@@ -1,4 +1,6 @@
-﻿namespace Lab01
+﻿using System.Text;
+
+namespace Lab01
 {
     internal class Program
     {
@@ -97,6 +99,13 @@
             {
                 Console.WriteLine("nullstr is null");
             }
+
+            //2 - d
+            StringBuilder sb = new StringBuilder("Строка из букавов");
+            sb.Remove(7, 2);
+            sb.Insert(0, "start");
+            sb.AppendFormat("abc", sb);
+            Console.WriteLine(sb);
 
         }
     }
