@@ -43,7 +43,11 @@
             Object BoxedValue = SomeIntValue;
             //-----unbox
             int SomeNewIntValue = (int)BoxedValue;
-            
+            //1-d
+            var samoVar = "Самовар";
+            var intVar = 55;
+            Console.WriteLine($"Интовский вар: {intVar} , samoVar: {samoVar}, Контеканация(как пример работы с ними): {intVar + samoVar}");
+
         }
     }
 }
