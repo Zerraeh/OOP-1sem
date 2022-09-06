@@ -49,11 +49,13 @@
             Console.WriteLine($"Интовский вар: {intVar} , samoVar: {samoVar}, Контеканация(как пример работы с ними): {intVar + samoVar}");
             // 1-e
             int? nullable = null;
-
+            int valuefortest = Convert.ToInt32(nullable);
+            Console.WriteLine(valuefortest);
             //1-f
             var q = 5;
             q = 'a';
             //а где ошибка то потерялась?
+
         }
     }
 }
