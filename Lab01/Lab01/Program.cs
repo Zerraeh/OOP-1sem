@@ -128,6 +128,24 @@ namespace Lab01
             }
 
 
+            // 3 - c
+            Console.WriteLine("\n\n");
+            double[][] dblArray = new double[3][];
+            dblArray[0] = new double[2] { 1.5, 2.5 };
+            dblArray[1] = new double[3] { 1.5, 2.5, 3.5 };
+            dblArray[2] = new double[4] { 1.5, 2.5, 3.5, 4.5 };
+            for (int i = 0; i < dblArray.Length; i++)
+            {
+                for (int j = 0; j < dblArray[i].Length; j++)
+                {
+                    Console.Write($"{dblArray[i][j]} \t");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("\n\n");
+
+            //3 - d
+
         }
     }
 }
