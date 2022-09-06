@@ -38,6 +38,12 @@
 
             intValue = Convert.ToInt32(longValue);
             Console.WriteLine(intValue);
+            //1-c
+            int SomeIntValue = 35;
+            Object BoxedValue = SomeIntValue;
+            //-----unbox
+            int SomeNewIntValue = (int)BoxedValue;
+            
         }
     }
 }
