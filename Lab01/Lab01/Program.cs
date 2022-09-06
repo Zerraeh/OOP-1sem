@@ -145,6 +145,11 @@ namespace Lab01
             Console.WriteLine("\n\n");
 
             //3 - d
+            var strVar = "stroka";
+            var arrayforVar = new int[] { 1, 2, 3 };
+            
+
+
 
         }
     }
