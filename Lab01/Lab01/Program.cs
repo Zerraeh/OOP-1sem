@@ -89,7 +89,15 @@
 
             long phoneNum = 80296665544;
             Console.WriteLine($"{phoneNum: #### ### ## ##}");
-            
+
+            //2 -c
+            string? nullStr = null;
+            string emptyStr = "";
+            if(String.IsNullOrEmpty(nullStr))
+            {
+                Console.WriteLine("nullstr is null");
+            }
+
         }
     }
 }
