@@ -70,10 +70,12 @@ namespace Lab02
                 trains[i].startTime = Convert.ToDateTime(Console.ReadLine());
             }
             
-            Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. \n 1 - То же, что и в (0), но с датой отправки. \n 2 - Выход");
-
-
-            int caseCheck = Convert.ToInt32(Console.ReadLine());
+            
+            int caseCheck;
+            do
+            {
+                Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. \n 1 - То же, что и в (0), но с датой отправки. \n 2 - Выход");
+                caseCheck = Convert.ToInt32(Console.ReadLine());
                 switch (caseCheck)
                 {
                     case 0: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); placeToList(placeOfStop, trains); break;
@@ -81,7 +83,7 @@ namespace Lab02
                     default:
                         break;
                 }
-    
+            } while (caseCheck != 2);
 
 
 
