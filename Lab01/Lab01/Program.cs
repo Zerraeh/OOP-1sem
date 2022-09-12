@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Net.Http.Headers;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -64,9 +65,9 @@ namespace Lab01
             //2-a
             const string str1 = "надоела эта лабораторная, какая же она скучная, лучше бы сделали покороче, чем это всё протыкивать";
             const string str2 = "согласен со сказанным выше (c)моя шизофрения";
-            if(str1 == str2)
+            if (str1 == str2)
             {
-                Console.WriteLine(str1 , str2);
+                Console.WriteLine(str1, str2);
             }
 
             //2-b
@@ -80,7 +81,7 @@ namespace Lab01
             string firstword = sumStr.Substring(0, sumStr.IndexOf(','));
             string txt = "Вот так вот и вышло";
             string[] words = txt.Split(new char[] { ' ' });
-            foreach(string s in words)
+            foreach (string s in words)
             {
                 Console.WriteLine(s);
             }
@@ -97,7 +98,7 @@ namespace Lab01
             //2 -c
             string? nullStr = null;
             string emptyStr = "";
-            if(String.IsNullOrEmpty(nullStr))
+            if (String.IsNullOrEmpty(nullStr))
             {
                 Console.WriteLine("nullstr is null");
             }
@@ -116,14 +117,14 @@ namespace Lab01
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    arrayMatrix[i,j] = rand.Next();
+                    arrayMatrix[i, j] = rand.Next();
                     Console.Write($"{arrayMatrix[i, j]}\t");
                 }
                 Console.WriteLine();
             }
 
             //3 - b
-            string[] strArray = new string[] {"abc", "def", "ghi", "jkl", "mno","pqrst", "uvw"};
+            string[] strArray = new string[] { "abc", "def", "ghi", "jkl", "mno", "pqrst", "uvw" };
             for (int i = 0; i < strArray.Length; i++)
             {
                 Console.Write(strArray[i]);
@@ -149,9 +150,9 @@ namespace Lab01
             //3 - d
             var strVar = "stroka";
             var arrayforVar = new int[] { 1, 2, 3 };
-            
+
             //4
-            (int firstC, string secondC, char thirdC, string fourthC,ulong fivesC)cortage = (1, "strstrstr", 'c', "strstr2", 18446744073709551615);
+            (int firstC, string secondC, char thirdC, string fourthC, ulong fivesC) cortage = (1, "strstrstr", 'c', "strstr2", 18446744073709551615);
             Console.WriteLine(cortage.Item1);
             Console.WriteLine(cortage.Item3);
             Console.WriteLine(cortage.Item4);
@@ -171,12 +172,12 @@ namespace Lab01
             Console.WriteLine(_);
             //d
             Console.WriteLine(tuple != tuple2); //true
-            
+
 
             //--5
-            (int, int, int, string)func(int[] arr, string str)
+            (int, int, int, string) func(int[] arr, string str)
             {
-                int max= int.MinValue;
+                int max = int.MinValue;
                 int min = int.MaxValue;
                 int sum = 0;
                 for (int i = 0; i < arr.Length; i++)
@@ -187,18 +188,19 @@ namespace Lab01
                     }
                     else
                     {
-                        if (min > arr[i]) {
-                            min = arr[i]; 
+                        if (min > arr[i])
+                        {
+                            min = arr[i];
                         }
                     }
                     sum += arr[i];
                 }
-                string returnStr = str.Substring(0,1);
-                return (min,max, sum, returnStr);
+                string returnStr = str.Substring(0, 1);
+                return (min, max, sum, returnStr);
             }
             int[] arrayForFunc = { 1, 2, 3 };
             string strForFunc = "monke";
-            (int, int, int, string) tupleFunky = func(arrayForFunc,strForFunc);
+            (int, int, int, string) tupleFunky = func(arrayForFunc, strForFunc);
             Console.WriteLine(tupleFunky.Item4);
 
 
@@ -209,19 +211,20 @@ namespace Lab01
                 checked
                 {
                     int maxint = int.MaxValue;
+
+                    Console.WriteLine(maxint);
                 }
             }
             void funcforunchecked()
             {
                 unchecked
                 {
-                    int maxint = int.MaxValue;
+                    int maxint = int.MaxValue + 1;
+                    Console.WriteLine(maxint);
                 }
             }
             funcforchecked();
             funcforunchecked();
-
-            
-        }
+        } 
     }
 }
