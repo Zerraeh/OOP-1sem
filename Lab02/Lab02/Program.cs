@@ -29,23 +29,35 @@ namespace Lab02
                 
                 Console.WriteLine("Всего мест в поезде: ",sum);
             }
-
-            public void placeToList()
-            {
-
-            }
-
-            public void placesAndDateToList()
-            {
-
-            }
-        }
+         }
         static void Main(string[] args)
         {
+            void placeToList(string place, Train[] trains)
+            {
 
+                for (int i = 0; i < trains.Length; i++)
+                {
+                    if (trains[i].stopPoint == place)
+                    {
+                        Console.WriteLine(trains[i].trainNumber);
+                    }
+                }
+            }
+
+            void placeAndDateToList(string place, Train[] trains)
+            {
+                for (int i = 0; i < trains.Length; i++)
+                {
+                    if (trains[i].stopPoint == place)
+                    {
+                        Console.WriteLine($"{trains[i].trainNumber} \t-\t {trains[i].startTime}");
+                    }
+                }
+            }
             int[] places = { 200, 100, 50, 10 };
             Console.WriteLine("Введите число поездов: ");
             int numberOfTrains = Convert.ToInt32(Console.ReadLine());
+
             Train[] trains = new Train[numberOfTrains];
             for (int i = 0; i < numberOfTrains; i++)
             {
@@ -57,7 +69,23 @@ namespace Lab02
                 Console.WriteLine("Время отправки: ");
                 trains[i].startTime = Convert.ToDateTime(Console.ReadLine());
             }
+            
+            Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. \n 1 - То же, что и в (0), но с датой отправки. \n 2 - Выход");
 
+
+            int caseCheck = Convert.ToInt32(Console.ReadLine());
+                switch (caseCheck)
+                {
+                    case 0: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); placeToList(placeOfStop, trains); break;
+                    case 1: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); placeAndDateToList(placeOfStop, trains); break;
+                    default:
+                        break;
+                }
+    
+
+
+
+            Console.ReadKey();
         }
     }
 }
