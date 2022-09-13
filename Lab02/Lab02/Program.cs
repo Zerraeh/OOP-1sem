@@ -15,6 +15,7 @@ namespace Lab02
         //назначения;
         //b) список поездов, следующих до заданного пункта назначения
         //и отправляющихся после заданного часа;
+         
         class Train
         {
             public string stopPoint;
@@ -27,14 +28,16 @@ namespace Lab02
 
 
             readonly int identity;
-            
 
+
+            public static int numberofTrains = 0; 
 
             public Train(DateTime startTime,string stopPoint = "ОШИБОЧНЫЙ ВВОД", int trainNumber=0 )
             {
                 this.stopPoint = stopPoint;
                 this.trainNumber = trainNumber;
                 this.startTime = startTime;
+                numberofTrains++;
                 Random rand = new Random();
                 for (int i = 0; i < this.places.Length; i++)
                 {
@@ -89,18 +92,28 @@ namespace Lab02
                 
                 Console.WriteLine("Всего мест в поезде: " + sum);
             }
-         }
+
+            public static void details()
+            {
+                Console.WriteLine($"Информация о классе:\n Класс Trains используется для хранения информации о поездах и их особенностях");
+            }
+        }
 
         class Table
         {
-            public void placeToList(string place, Train[] trains)
+           
+            public void placeToList(string place,ref Train[] trains)
             {
 
                 for (int i = 0; i < trains.Length; i++)
                 {
                     if (trains[i].stopPoint == place)
                     {
-                        Console.WriteLine($"[{i}]\tНомер " + trains[i].trainNumber + $" отправляется в {place}");
+                        Console.WriteLine($"[{i}]\tНомер " + trains[i].trainNumber + $" отправляется в {trains[i].stopPoint}");
+                    }
+                    else if (place == "all")
+                    {
+                        Console.WriteLine($"[{i}]\tНомер " + trains[i].trainNumber + $" отправляется в {trains[i].stopPoint}");
                     }
                 }
             }
@@ -113,12 +126,33 @@ namespace Lab02
                     {
                         Console.WriteLine($"[{i}]\t-\t{trains[i].trainNumber} \t-\t {trains[i].startTime}");
                     }
+                    else if (place == "all")
+                    {
+                        Console.WriteLine($"[{i}]\t-\t{trains[i].trainNumber} \t-\t {trains[i].startTime}");
+                    }
                 }
+            }
+        }
+
+        public partial class partialTest{
+            public void NePridumal()
+            {
+                Console.WriteLine("Ничего не придумал для этого варианта,");
+            }
+        }
+
+
+        public partial class partialTest
+        {
+            public void Poetomu()
+            {
+                Console.WriteLine("поэтому просто покажу, как работает partial.");
             }
         }
         static void Main(string[] args)
         {
-            
+            try
+            {
             Console.WriteLine("Введите число поездов: ");
             int numberOfTrains = Convert.ToInt32(Console.ReadLine());
 
@@ -138,9 +172,9 @@ namespace Lab02
 
                 for (int j = 0; j <= i; j++)
                 {
-                    if (NUM == NUMarray[j])
+                    if (NUM == NUMarray[j] || STOP == "all")
                     {
-                        Console.WriteLine("Номера совпали, дружище, вводи заново...");
+                        Console.WriteLine("Номера совпали, дружище, вводи заново...Или вы в название ввели \"all\", что запрещено использовать");
                         i--;
                         continue;
                     }
@@ -155,27 +189,37 @@ namespace Lab02
 
             int caseCheck;
             int numCheck;
+            string placeOfStop;
             Table TrainTable = new Table();
             do
             {
                 Console.WriteLine("Выберите один из пунктов:\n 1 - Список поездов, отправляющихся в место назначения. " +
                     "\n 2 - То же, что и в (0), но с датой отправки." +
                     " \n 3 - Вывести число оставшихся мест поезда." +
-                    " \n 4 - Выход");
+                    " \n 4 - Выход.");
                 caseCheck = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 switch (caseCheck)
                 {
-                    case 1: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); TrainTable.placeToList(placeOfStop, trains); break;
-                    case 2: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); break;
-                    case 3: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); Console.WriteLine("Введите номер строки: "); numCheck = Convert.ToInt32(Console.ReadLine()); trains[numCheck].placesShow(); break;
-                    default:
+                    case 1: Console.WriteLine("Введите место назначения(all, чтобы показать все рейсы): "); placeOfStop = Console.ReadLine(); TrainTable.placeToList(placeOfStop,ref trains); break;
+                    case 2: Console.WriteLine("Введите место назначения(all, чтобы показать все рейсы): "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); break;
+                    case 3: Console.WriteLine("Введите место назначения(all, чтобы показать все рейсы): "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); Console.WriteLine("Введите номер строки: "); numCheck = Convert.ToInt32(Console.ReadLine()); trains[numCheck].placesShow(); break;
+                        default:
                         break;
                 }
             } while (caseCheck != 4);
 
 
+            }//try
+            catch
+            {
+                Console.WriteLine("Ошибочный ввод.");
+            }//catch
+            partialTest partialShow = new partialTest();
+            partialShow.NePridumal();
+            partialShow.Poetomu();
+        var trainBolshoy = new { stopPoint = "qw", trainNumber = "222", startTime = new DateTime(2020,12,22,18,22,32) };
 
-        }
-    }
-}
+        }//main
+    }//internal class Program
+}//namespace
