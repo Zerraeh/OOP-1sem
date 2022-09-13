@@ -23,11 +23,13 @@ namespace Lab02
             int[] places = {0, 0, 0, 0};
 
 
-            public const int MAXTRAINNUMBER = 999;
+            public const int MAXTRAINNUMBER = 200;
 
 
             readonly int identity;
             
+
+
             public Train(string stopPoint, int trainNumber, DateTime startTime)
             {
                 this.stopPoint = stopPoint;
@@ -40,6 +42,7 @@ namespace Lab02
             static Train()
             {
                 Console.WriteLine("-\t- ПОЕЗДА -\t-");
+
             }
 
 
@@ -48,6 +51,20 @@ namespace Lab02
                 this.identity = trainNumber.GetHashCode();
             }
 
+
+            public int platformCheck
+            {
+                set{
+                    if (trainNumber >= MAXTRAINNUMBER)
+                    {
+                        Console.WriteLine($"Не желательно использовать номер больший чем {MAXTRAINNUMBER}, это может привести к путанице.");
+                    }
+                }
+                get
+                {
+                    return 0;
+                }
+            }
 
             public void placesShow()
             {
