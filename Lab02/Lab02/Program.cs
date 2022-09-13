@@ -30,11 +30,16 @@ namespace Lab02
             
 
 
-            public Train(string stopPoint, int trainNumber, DateTime startTime)
+            public Train(DateTime startTime,string stopPoint = "ОШИБОЧНЫЙ ВВОД", int trainNumber=0 )
             {
                 this.stopPoint = stopPoint;
                 this.trainNumber = trainNumber;
                 this.startTime = startTime;
+                Random rand = new Random();
+                for (int i = 0; i < this.places.Length; i++)
+                {
+                    this.places[i] = rand.Next(0, 100);
+                }
                 Console.WriteLine($"Новый поезд создан, его данные:\n Точка остановки - \t {stopPoint}\n Номер поезда - \t {trainNumber}\n Время отправки - \t {startTime}");
             }
 
@@ -68,11 +73,7 @@ namespace Lab02
 
             public void placesShow()
             {
-                Random rand = new Random();
-                for (int i = 0; i < this.places.Length; i++)
-                {
-                    this.places[i] = rand.Next(0, 100);
-                }
+                
                 Console.WriteLine("-\tСПИСОК МЕСТ ПОЕЗДА\t-");
                 string[] placetoString = { "Общие: ", "Купе: ", "Плацкарт: ", "Люкс: "};
                 for (int i = 0; i < this.places.Length; i++)
@@ -146,7 +147,7 @@ namespace Lab02
                     else
                     {
                         NUMarray[j] = NUM;
-                        trains[i] = new Train(STOP, NUM, TIME);
+                        trains[i] = new Train(TIME, STOP, NUM);
                     }
                 }
             }
