@@ -90,10 +90,9 @@ namespace Lab02
             }
          }
 
-
-        static void Main(string[] args)
+        class Table
         {
-            void placeToList(string place, Train[] trains)
+            public void placeToList(string place, Train[] trains)
             {
 
                 for (int i = 0; i < trains.Length; i++)
@@ -105,7 +104,7 @@ namespace Lab02
                 }
             }
 
-            void placeAndDateToList(string place, Train[] trains)
+            public void placeAndDateToList(string place, Train[] trains)
             {
                 for (int i = 0; i < trains.Length; i++)
                 {
@@ -115,6 +114,10 @@ namespace Lab02
                     }
                 }
             }
+        }
+        static void Main(string[] args)
+        {
+            
             Console.WriteLine("Введите число поездов: ");
             int numberOfTrains = Convert.ToInt32(Console.ReadLine());
 
@@ -150,23 +153,25 @@ namespace Lab02
             
 
             int caseCheck;
+            int numCheck;
+            Table TrainTable = new Table();
             do
             {
-                Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. " +
-                    "\n 1 - То же, что и в (0), но с датой отправки." +
-                    " \n 2 - Вывести число оставшихся мест поезда." +
-                    " \n 3 - Выход");
+                Console.WriteLine("Выберите один из пунктов:\n 1 - Список поездов, отправляющихся в место назначения. " +
+                    "\n 2 - То же, что и в (0), но с датой отправки." +
+                    " \n 3 - Вывести число оставшихся мест поезда." +
+                    " \n 4 - Выход");
                 caseCheck = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 switch (caseCheck)
                 {
-                    case 0: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); placeToList(placeOfStop, trains); break;
-                    case 1: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); placeAndDateToList(placeOfStop, trains); break;
-                    case 2: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); placeAndDateToList(placeOfStop, trains); Console.WriteLine("Введите номер строки: "); caseCheck = Convert.ToInt32(Console.ReadLine()); trains[caseCheck].placesShow(); break;
+                    case 1: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); TrainTable.placeToList(placeOfStop, trains); break;
+                    case 2: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); break;
+                    case 3: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); TrainTable.placeAndDateToList(placeOfStop, trains); Console.WriteLine("Введите номер строки: "); numCheck = Convert.ToInt32(Console.ReadLine()); trains[numCheck].placesShow(); break;
                     default:
                         break;
                 }
-            } while (caseCheck != 3);
+            } while (caseCheck != 4);
 
 
 
