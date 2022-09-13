@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Lab02
 {
@@ -19,6 +20,14 @@ namespace Lab02
             public string stopPoint;
             public int trainNumber;
             public DateTime startTime = new DateTime();
+            int[] places = {0, 0, 0, 0};
+
+
+            public const int MAXTRAINNUMBER = 999;
+
+
+            readonly int identity;
+            
             public Train(string stopPoint, int trainNumber, DateTime startTime)
             {
                 this.stopPoint = stopPoint;
@@ -27,17 +36,44 @@ namespace Lab02
                 Console.WriteLine($"Новый поезд создан, его данные:\n Точка остановки - \t {stopPoint}\n Номер поезда - \t {trainNumber}\n Время отправки - \t {startTime}");
             }
 
-            public void placesShow(int[] places)
+
+            static Train()
             {
-                int sum = 0;
-                for (int i = 0; i < places.Length; i++)
+                Console.WriteLine("-\t- ПОЕЗДА -\t-");
+            }
+
+
+            private Train()
+            {
+                this.identity = trainNumber.GetHashCode();
+            }
+
+
+            public void placesShow()
+            {
+                Random rand = new Random();
+                for (int i = 0; i < this.places.Length; i++)
                 {
-                    sum += places[i];
+                    this.places[i] = rand.Next(0, 100);
+                }
+                Console.WriteLine("-\tСПИСОК МЕСТ ПОЕЗДА\t-");
+                string[] placetoString = { "Общие: ", "Купе: ", "Плацкарт: ", "Люкс: "};
+                for (int i = 0; i < this.places.Length; i++)
+                {
+                    Console.Write(placetoString[i]);
+                    Console.WriteLine(this.places[i]);
+                }
+                int sum = 0;
+                for (int i = 0; i < this.places.Length; i++)
+                {
+                    sum += this.places[i];
                 }
                 
-                Console.WriteLine("Всего мест в поезде: ",sum);
+                Console.WriteLine("Всего мест в поезде: " + sum);
             }
          }
+
+
         static void Main(string[] args)
         {
             void placeToList(string place, Train[] trains)
@@ -47,7 +83,7 @@ namespace Lab02
                 {
                     if (trains[i].stopPoint == place)
                     {
-                        Console.WriteLine(trains[i].trainNumber);
+                        Console.WriteLine($"[{i}]\tНомер " + trains[i].trainNumber + $" отправляется в {place}");
                     }
                 }
             }
@@ -58,14 +94,14 @@ namespace Lab02
                 {
                     if (trains[i].stopPoint == place)
                     {
-                        Console.WriteLine($"{trains[i].trainNumber} \t-\t {trains[i].startTime}");
+                        Console.WriteLine($"[{i}]\t-\t{trains[i].trainNumber} \t-\t {trains[i].startTime}");
                     }
                 }
             }
-            int[] places = { 200, 100, 50, 10 };
             Console.WriteLine("Введите число поездов: ");
             int numberOfTrains = Convert.ToInt32(Console.ReadLine());
-            
+
+            int[] NUMarray = new int[numberOfTrains+1];
             Train[] trains = new Train[numberOfTrains];
             for (int i = 0; i < numberOfTrains; i++)
             {
@@ -78,23 +114,42 @@ namespace Lab02
                 NUM = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Время отправки: ");
                 TIME = Convert.ToDateTime(Console.ReadLine());
-                trains[i] = new Train(STOP, NUM, TIME); 
+
+                for (int j = 0; j <= i; j++)
+                {
+                    if (NUM == NUMarray[j])
+                    {
+                        Console.WriteLine("Номера совпали, дружище, вводи заново...");
+                        i--;
+                        continue;
+                    }
+                    else
+                    {
+                        NUMarray[j] = NUM;
+                        trains[i] = new Train(STOP, NUM, TIME);
+                    }
+                }
             }
             
-            
+
             int caseCheck;
             do
             {
-                Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. \n 1 - То же, что и в (0), но с датой отправки. \n 2 - Выход");
+                Console.WriteLine("Выберите один из пунктов:\n 0 - Список поездов, отправляющихся в место назначения. " +
+                    "\n 1 - То же, что и в (0), но с датой отправки." +
+                    " \n 2 - Вывести число оставшихся мест поезда." +
+                    " \n 3 - Выход");
                 caseCheck = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
                 switch (caseCheck)
                 {
                     case 0: Console.WriteLine("Введите место назначения: "); string placeOfStop = Console.ReadLine(); placeToList(placeOfStop, trains); break;
                     case 1: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); placeAndDateToList(placeOfStop, trains); break;
+                    case 2: Console.WriteLine("Введите место назначения: "); placeOfStop = Console.ReadLine(); placeAndDateToList(placeOfStop, trains); Console.WriteLine("Введите номер строки: "); caseCheck = Convert.ToInt32(Console.ReadLine()); trains[caseCheck].placesShow(); break;
                     default:
                         break;
                 }
-            } while (caseCheck != 2);
+            } while (caseCheck != 3);
 
 
 
