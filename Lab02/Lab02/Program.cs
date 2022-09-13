@@ -19,6 +19,14 @@ namespace Lab02
             public string stopPoint;
             public int trainNumber;
             public DateTime startTime = new DateTime();
+            public Train(string stopPoint, int trainNumber, DateTime startTime)
+            {
+                this.stopPoint = stopPoint;
+                this.trainNumber = trainNumber;
+                this.startTime = startTime;
+                Console.WriteLine($"Новый поезд создан, его данные:\n Точка остановки - \t {stopPoint}\n Номер поезда - \t {trainNumber}\n Время отправки - \t {startTime}");
+            }
+
             public void placesShow(int[] places)
             {
                 int sum = 0;
@@ -57,17 +65,20 @@ namespace Lab02
             int[] places = { 200, 100, 50, 10 };
             Console.WriteLine("Введите число поездов: ");
             int numberOfTrains = Convert.ToInt32(Console.ReadLine());
-
+            
             Train[] trains = new Train[numberOfTrains];
             for (int i = 0; i < numberOfTrains; i++)
             {
-                trains[i] = new Train();
+                string STOP;
+                int NUM;
+                DateTime TIME;
                 Console.WriteLine("Введите точку назначения: ");
-                trains[i].stopPoint = Console.ReadLine();
+                STOP = Console.ReadLine();
                 Console.WriteLine("Введите номер поезда: ");
-                trains[i].trainNumber = Convert.ToInt32(Console.ReadLine());
+                NUM = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Время отправки: ");
-                trains[i].startTime = Convert.ToDateTime(Console.ReadLine());
+                TIME = Convert.ToDateTime(Console.ReadLine());
+                trains[i] = new Train(STOP, NUM, TIME); 
             }
             
             
@@ -87,7 +98,6 @@ namespace Lab02
 
 
 
-            Console.ReadKey();
         }
     }
 }
