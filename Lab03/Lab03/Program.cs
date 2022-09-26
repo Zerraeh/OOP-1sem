@@ -159,12 +159,15 @@ namespace Lab03
             Console.WriteLine(stroka1.Value);
             Console.WriteLine(stroka2.Value);
             char[] charArray = StatisticOperation.summa(stroka1, stroka2);
+            Console.Write("Сумма строк stroka1 и stroka2 : ");
             Console.WriteLine(charArray);
+            int raznValue = StatisticOperation.razn(stroka1, stroka2);
+            Console.WriteLine($"Разница длин строк : {raznValue}");
+            Console.WriteLine($"Число элементов в строке stroka1 : {StatisticOperation.numberofElement(stroka1)}");
+            
 
-            
-            
-            
-            
+
+
         }
 
     }
