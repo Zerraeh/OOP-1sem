@@ -140,8 +140,9 @@ namespace Lab03
                 return str.Value.Length;
             }
         }
-            
-        static void Main(string[] args)
+
+        
+            static void Main(string[] args)
         {
             Stroka stroka1 = new Stroka();
             Stroka stroka2 = new Stroka();
@@ -164,9 +165,11 @@ namespace Lab03
             int raznValue = StatisticOperation.razn(stroka1, stroka2);
             Console.WriteLine($"Разница длин строк : {raznValue}");
             Console.WriteLine($"Число элементов в строке stroka1 : {StatisticOperation.numberofElement(stroka1)}");
-            
 
-
+            string strxd = "xd";
+            string strqw = "qw";
+            strxd = strxd.summa(strqw);
+            Console.WriteLine(strxd);
 
         }
 
