@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Lab02
@@ -46,7 +47,10 @@ namespace Lab02
                 Console.WriteLine($"Новый поезд создан, его данные:\n Точка остановки - \t {stopPoint}\n Номер поезда - \t {trainNumber}\n Время отправки - \t {startTime}");
             }
 
-
+            public void input(ref Train[] trains,int index,DateTime startTime, string stopPoint = "ОШИБОЧНЫЙ ВВОД", int trainNumber = 0)
+            {
+                trains[index] = new Train(startTime, stopPoint, trainNumber);
+            }
             static Train()
             {
                 Console.WriteLine("-\t- ПОЕЗДА -\t-");
@@ -181,7 +185,7 @@ namespace Lab02
                     else
                     {
                         NUMarray[j] = NUM;
-                        trains[i] = new Train(TIME, STOP, NUM);
+                            trains[i] = new Train(TIME, STOP, NUM);
                     }
                 }
             }
@@ -219,7 +223,7 @@ namespace Lab02
             partialShow.NePridumal();
             partialShow.Poetomu();
         var trainBolshoy = new { stopPoint = "qw", trainNumber = "222", startTime = new DateTime(2020,12,22,18,22,32) };
-
+           
         }//main
     }//internal class Program
 }//namespace
