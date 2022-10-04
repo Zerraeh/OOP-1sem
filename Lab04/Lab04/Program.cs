@@ -2,7 +2,13 @@
 {
     internal class Program
     {
-        
+        public class Printer
+        {
+            public void IAmPrinting(transportMove item)
+            {
+                item.ToString();
+            }
+        }
         public interface transportMove
         {
             void Move();
@@ -12,8 +18,16 @@
         {
             public abstract void Move();
             public abstract void ToString();
+            public Transport()
+            {
+                Console.WriteLine("xd");
+            }
             public class car : Transport
             {
+                public car() : base()
+                {
+
+                }
                 public override void ToString()
                 {
                     Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
@@ -95,6 +109,18 @@
             }
             car1.ToString();
             expressTrain.ToString();
+
+            //7
+            var printer = new Printer();
+            Transport[] transports = new Transport[3];
+            transports[0] = train1;
+            transports[1] = car1;
+            transports[2] = expressTrain;
+
+            foreach (Transport item in transports)
+            {
+                printer.IAmPrinting(item);
+            }
 
         }
     }
