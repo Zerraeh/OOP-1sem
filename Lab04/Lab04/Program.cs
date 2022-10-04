@@ -52,16 +52,27 @@
         {
             //11 вариант - Автомобиль, Поезд, Транспортное средство, Экспресс, Двигатель, Вагон
             Transport.car car1 = new Transport.car();
-            car1.Move();
             Transport.train.Express expressTrain = new Transport.train.Express();
+            Transport.car.engine engine = new Transport.car.engine();
+            Transport.train.vagon vagon = new Transport.train.vagon();
+
+
+
+            car1.Move();
             Console.WriteLine("----");
+
             expressTrain.ExpressOrNot();
             expressTrain.Move();
             Console.WriteLine("----");
-            Transport.car.engine engine = new Transport.car.engine();
+            
             engine.Work();
-            Transport.train.vagon vagon = new Transport.train.vagon();
+            Console.WriteLine("----");
+
             vagon.Move();
+            Console.WriteLine("----");
+            
+
+           
         }
     }
 }
