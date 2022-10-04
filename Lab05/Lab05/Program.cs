@@ -1,4 +1,4 @@
-﻿namespace Lab04
+﻿namespace Lab05
 {
     internal class Program
     {
@@ -19,19 +19,15 @@
             public abstract void Move();
             public abstract void ToString();
 
-            
+            public Transport()
+            {
+                Console.WriteLine("xd");
+            }
             public class car : Transport
             {
-                public enum carType
+                public car() : base()
                 {
-                    sedan,
-                    coupe,
-                    sportCar,
-                    stationVagon,
-                    hatchBack,
-                    convertible,
-                    minivan,
-                    truck
+
                 }
                 public override void ToString()
                 {
@@ -53,15 +49,7 @@
 
             public class train : Transport
             {
-                struct trainNumber
-                {
-                    int sessionNumber;
-                    string type;
-                    bool peopleOnly;
-                    bool restraunt;
-                    int places;
-                }
-
+                int trainNumber;
                 public override void ToString()
                 {
                     Console.WriteLine($"Это поезд {this}. Он может использовать Move, чтобы ехать по рельсам..");
@@ -81,7 +69,7 @@
                 public class Express : train
                 {
                     int expressNumber;
-                    
+
                     public void ExpressOrNot()
                     {
                         Console.WriteLine("Поезд является Экспрессом");
@@ -106,7 +94,7 @@
             expressTrain.ExpressOrNot();
             expressTrain.Move();
             Console.WriteLine("----");
-            
+
             engine.Work();
             Console.WriteLine("----");
 
