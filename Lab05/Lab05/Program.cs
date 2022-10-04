@@ -19,16 +19,10 @@
             public abstract void Move();
             public abstract void ToString();
 
-            public Transport()
-            {
-                Console.WriteLine("xd");
-            }
+            
             public class car : Transport
             {
-                public car() : base()
-                {
-
-                }
+               
                 public override void ToString()
                 {
                     Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
