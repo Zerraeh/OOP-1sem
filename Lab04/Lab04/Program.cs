@@ -2,21 +2,22 @@
 {
     internal class Program
     {
-
-        public abstract class Transport
+        
+        public interface transportMove
         {
-            public void Move()
-            {
-                Console.WriteLine("Транспорт движется.");
-            }
-
+            void Move();
+        }
+        public abstract class Transport : transportMove
+        {
+            public abstract void Move();
+                
             public class car : Transport
             {
-                public void Move()
+                public override void Move()
                 {
                     Console.WriteLine("Автомобиль движется по дороге.");
                 }
-                public class engine
+                public sealed class engine
                 {
                     public void Work()
                     {
@@ -28,7 +29,7 @@
 
             public class train : Transport
             {
-                public void Move()
+                public override void Move()
                 {
                     Console.WriteLine("Поезд движется по рельсам.");
                 }
