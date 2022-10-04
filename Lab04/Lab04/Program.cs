@@ -6,13 +6,18 @@
         public interface transportMove
         {
             void Move();
+            void ToString();
         }
         public abstract class Transport : transportMove
         {
             public abstract void Move();
-                
+            public abstract void ToString();
             public class car : Transport
             {
+                public override void ToString()
+                {
+                    Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
+                }
                 public override void Move()
                 {
                     Console.WriteLine("Автомобиль движется по дороге.");
@@ -29,6 +34,11 @@
 
             public class train : Transport
             {
+                int trainNumber;
+                public override void ToString()
+                {
+                    Console.WriteLine($"Это поезд {this}. Он может использовать Move, чтобы ехать по рельсам..");
+                }
                 public override void Move()
                 {
                     Console.WriteLine("Поезд движется по рельсам.");
@@ -40,6 +50,8 @@
 
                 public class Express : train
                 {
+                    int expressNumber;
+                    
                     public void ExpressOrNot()
                     {
                         Console.WriteLine("Поезд является Экспрессом");
@@ -70,9 +82,20 @@
 
             vagon.Move();
             Console.WriteLine("----");
-            
 
-           
+
+            //5
+            Transport.train train1 = new Transport.train();
+
+            Console.WriteLine($"Поезд экспресс? - {train1 is Transport.train.Express}");
+            Transport.train.Express? expressTrain1 = train1 as Transport.train.Express;
+            if (expressTrain1 == null)
+            {
+                Console.WriteLine("Неудачно!");
+            }
+            car1.ToString();
+            expressTrain.ToString();
+
         }
     }
 }
