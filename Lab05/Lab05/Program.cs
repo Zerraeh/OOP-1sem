@@ -22,7 +22,17 @@
             
             public class car : Transport
             {
-               
+                public enum carType
+                {
+                    sedan,
+                    coupe,
+                    sportCar,
+                    stationVagon,
+                    hatchBack,
+                    convertible,
+                    minivan,
+                    truck
+                }
                 public override void ToString()
                 {
                     Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
@@ -43,7 +53,15 @@
 
             public class train : Transport
             {
-                int trainNumber;
+                struct trainNumber
+                {
+                    int sessionNumber;
+                    string type;
+                    bool peopleOnly;
+                    bool restraunt;
+                    int places;
+                }
+
                 public override void ToString()
                 {
                     Console.WriteLine($"Это поезд {this}. Он может использовать Move, чтобы ехать по рельсам..");
