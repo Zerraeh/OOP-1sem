@@ -54,7 +54,7 @@ namespace Lab03
             {
                 for (int i = 0; i < str1.Value.Length; i++)
                 {
-                    if (i%2!=0)
+                    if (i%2 != 0)
                     {
                         str1.Value[i] = ' ';
                     }
