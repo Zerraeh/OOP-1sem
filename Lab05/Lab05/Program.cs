@@ -1,27 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using static Lab05.Program.Transport.car;
 
 namespace Lab05
 {
     internal partial class Program
     {
-        static class Agency
-        {
-            static int prices = 0;
-            public static void costCount(int price)
-            {
-                prices += price;
-            }
-            public static void CW()
-            {
-                Console.WriteLine("Стоимость всего транспорта агенства: "+prices);
-            }
-            public static void findbySpeed()
-            {
-
-            }
-
-        }
 
         public interface transportMove
         {
@@ -30,6 +14,7 @@ namespace Lab05
         }
         public abstract class Transport : transportMove
         {
+            public int speed { get; set; }
             public abstract void Move();
             public abstract void ToString();
 
@@ -43,8 +28,9 @@ namespace Lab05
             {
                 Random rand = new Random();
                 Specs specs = new Specs();
+                this.speed = rand.Next(100, 500);
                 specs.price = rand.Next(500,1500);
-                Agency.costCount(specs.price);
+                Controller.costCount(specs.price);
             }
             
             
@@ -64,11 +50,12 @@ namespace Lab05
                     oil = 0,
                     electro = 1
                 }
-
+                public int speed { get; set; }
                 public car()
                 {
                     Random rand = new Random();
                     this.fuelConsume = rand.Next(3,10);
+                    this.speed = rand.Next(3, 10);
                 }
                //public static void carsConsume(ref Transport.car[] cars)
                // {
@@ -78,26 +65,7 @@ namespace Lab05
                //         cars[i].fuelConsume = Convert.ToInt32(rand.Next()); 
                //     }
                // }
-                public static void sort(ref Transport.car[] cars)
-                {
-                    Console.WriteLine("Автомобили по расходу топлива: \n\n");
-                    for (int i = 0; i < cars.Length; i++)
-                    {
-                        for (int j = 0; j < cars.Length; j++)
-                        {
-                            if (cars[i].fuelConsume > cars[j].fuelConsume)
-                            {
-                                int temp = cars[i].fuelConsume;
-                                cars[i].fuelConsume = cars[j].fuelConsume;
-                                cars[j].fuelConsume = temp;
-                            }
-                        }
-                    }
-                    for (int i = 0; i < cars.Length; i++)
-                    {
-                        Console.WriteLine($"[{i}]\t-\t{cars[i].fuelConsume}");
-                    }
-                }
+               
                 public override void ToString()
                 {
                     Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
@@ -130,10 +98,9 @@ namespace Lab05
 
             public class train : Transport
             {
-                
+                public int speed { get; set; }
                 struct Specs
                 {
-                    int speed;
                     int price;
                     int fuelConsume;
                     int trainNumber;
@@ -145,6 +112,11 @@ namespace Lab05
                     highSpeed = 2,
                     interCity = 3
                 }
+                public train()
+                {
+                    Random rand = new Random();
+                    this.speed = rand.Next(100, 500);
+                }
                 public override void ToString()
                 {
                     Console.WriteLine($"Это поезд {this}. Он может использовать Move, чтобы ехать по рельсам..");
@@ -155,6 +127,10 @@ namespace Lab05
                 }
                 public class vagon : train
                 {
+                    public vagon() : base()
+                    {
+
+                    }
                     public override void ToString()
                     {
                         Console.WriteLine($"Это машина {this}. Она может использовать Move, чтобы ехать..");
@@ -164,7 +140,10 @@ namespace Lab05
                 public class Express : train
                 {
                     int expressNumber;
+                    public Express() : base()
+                    {
 
+                    }
                     public void ExpressOrNot()
                     {
                         Console.WriteLine("Поезд является Экспрессом");
@@ -179,6 +158,7 @@ namespace Lab05
         }
         public static class Controller
         {
+            static int prices = 0;
             public static void Adder(ref Transport a, ref Container container)
             {
                 container.cont.Add(a);
@@ -190,6 +170,62 @@ namespace Lab05
             public static void Adder(ref Transport.train a, ref Container container)
             {
                 container.cont.Add(a);
+            }
+        
+            
+            public static void findbySpeed(int speed1, int speed2, ref Container container)
+            {
+                foreach(Transport c in container.cont)
+                {
+                    if (c.speed > speed1 && c.speed < speed2)
+                    {
+                        Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
+                    }
+                }
+                foreach (Transport.car c in container.cont)
+                {
+                    if (c.speed > speed1 && c.speed < speed2)
+                    {
+                        Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
+                    }
+                }
+                foreach (Transport.train c in container.cont)
+                {
+                    if (c.speed > speed1 && c.speed < speed2)
+                    {
+                        Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
+                    }
+                }
+
+            }
+            
+            public static void costCount(int price)
+            {
+                prices += price;
+            }
+            public static void CW()
+            {
+                Console.WriteLine("Стоимость всего транспорта агенства: " + prices);
+            }
+            public static void sort(ref Transport.car[] cars)
+            {
+                Console.WriteLine("Автомобили по расходу топлива: \n\n");
+                for (int i = 0; i < cars.Length; i++)
+                {
+                    for (int j = 0; j < cars.Length; j++)
+                    {
+                        if (cars[i].fuelConsume > cars[j].fuelConsume)
+                        {
+                            int temp = cars[i].fuelConsume;
+                            cars[i].fuelConsume = cars[j].fuelConsume;
+                            cars[j].fuelConsume = temp;
+                        }
+                    }
+                }
+                for (int i = 0; i < cars.Length; i++)
+                {
+                    Console.WriteLine($"[{i}]\t-\t{cars[i].fuelConsume}");
+                }
             }
         }
 
@@ -248,8 +284,8 @@ namespace Lab05
                 printer.IAmPrinting(item);
             }
             //carsConsume(ref cars);
-            sort(ref cars);
-            Agency.CW();
+            Controller.sort(ref cars);
+            Controller.CW();
             Container container = new Container();
 
             for (int i = 0; i < cars.Length; i++)
