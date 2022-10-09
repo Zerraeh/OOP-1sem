@@ -1,14 +1,22 @@
-﻿namespace Lab05
+﻿using static Lab05.Program.Transport.car;
+
+namespace Lab05
 {
-    internal class Program
+    internal partial class Program
     {
-        public class Printer
+        static class Agency
         {
-            public void IAmPrinting(transportMove item)
+            static int prices = 0;
+            public static void costCount(int price)
             {
-                item.ToString();
+                prices += price;
+            }
+            public static void CW()
+            {
+                Console.WriteLine("Стоимость всего транспорта агенства: "+prices);
             }
         }
+
         public interface transportMove
         {
             void Move();
@@ -19,15 +27,68 @@
             public abstract void Move();
             public abstract void ToString();
 
+            public struct Specs
+            {
+                public int price;
+                public int fuelConsume;
+            }
+
             public Transport()
             {
-                Console.WriteLine("xd");
+                Random rand = new Random();
+                Specs specs = new Specs();
+                specs.price = rand.Next(500,1500);
+                Agency.costCount(specs.price);
             }
+
             public class car : Transport
             {
-                public car() : base()
-                {
 
+                public int fuelConsume;
+                public struct Specs
+                {
+                    public int speed;
+                    public int price;
+                }
+                
+                enum Type
+                {
+                    oil = 0,
+                    electro = 1
+                }
+
+                public car()
+                {
+                    Random rand = new Random();
+                    this.fuelConsume = rand.Next(3,10);
+                }
+               //public static void carsConsume(ref Transport.car[] cars)
+               // {
+               //         Random rand = new Random();
+               //     for (int i = 0; i < cars.Length; i++)
+               //     {
+               //         cars[i].fuelConsume = Convert.ToInt32(rand.Next()); 
+               //     }
+               // }
+                public static void sort(ref Transport.car[] cars)
+                {
+                    Console.WriteLine("Автомобили по расходу топлива: \n\n");
+                    for (int i = 0; i < cars.Length; i++)
+                    {
+                        for (int j = 0; j < cars.Length; j++)
+                        {
+                            if (cars[i].fuelConsume > cars[j].fuelConsume)
+                            {
+                                int temp = cars[i].fuelConsume;
+                                cars[i].fuelConsume = cars[j].fuelConsume;
+                                cars[j].fuelConsume = temp;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < cars.Length; i++)
+                    {
+                        Console.WriteLine($"[{i}]\t-\t{cars[i].fuelConsume}");
+                    }
                 }
                 public override void ToString()
                 {
@@ -39,6 +100,18 @@
                 }
                 public sealed class engine
                 {
+                    enum Specs
+                    {
+                        disabled = 0,
+                        enabled = 1
+                    }
+                    struct Stats
+                    {
+                        int status;
+                        int waste;
+                        int hp;
+                    }
+                   
                     public void Work()
                     {
                         Console.WriteLine("Двигатель работает");
@@ -49,7 +122,21 @@
 
             public class train : Transport
             {
-                int trainNumber;
+                
+                struct Specs
+                {
+                    int speed;
+                    int price;
+                    int fuelConsume;
+                    int trainNumber;
+                }
+                enum Type
+                {
+                    longDistance = 0,
+                    shortDistance = 1,
+                    highSpeed = 2,
+                    interCity = 3
+                }
                 public override void ToString()
                 {
                     Console.WriteLine($"Это поезд {this}. Он может использовать Move, чтобы ехать по рельсам..");
@@ -78,14 +165,22 @@
             }
 
         }
+
+       
         static void Main(string[] args)
         {
             //11 вариант - Автомобиль, Поезд, Транспортное средство, Экспресс, Двигатель, Вагон
+            //11 вариант - Транспортное агенство(Эх...)
+
             Transport.car car1 = new Transport.car();
             Transport.train.Express expressTrain = new Transport.train.Express();
             Transport.car.engine engine = new Transport.car.engine();
             Transport.train.vagon vagon = new Transport.train.vagon();
-
+            Transport.car[] cars = new Transport.car[5];
+            for (int i = 0; i < 5; i++)
+            {
+                cars[i] = new Transport.car();
+            }
 
 
             car1.Move();
@@ -125,7 +220,9 @@
             {
                 printer.IAmPrinting(item);
             }
-
+            //carsConsume(ref cars);
+            sort(ref cars);
+            Agency.CW();
         }
     }
 }
