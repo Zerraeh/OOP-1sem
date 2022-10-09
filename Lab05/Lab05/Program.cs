@@ -182,20 +182,7 @@ namespace Lab05
                         Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
                     }
                 }
-                foreach (Transport.car c in container.cont)
-                {
-                    if (c.speed > speed1 && c.speed < speed2)
-                    {
-                        Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
-                    }
-                }
-                foreach (Transport.train c in container.cont)
-                {
-                    if (c.speed > speed1 && c.speed < speed2)
-                    {
-                        Console.WriteLine($"Найдено транспортное средство {c} со скоростью в диапазоне от {speed1} до {speed2}");
-                    }
-                }
+                
 
             }
             
@@ -240,11 +227,15 @@ namespace Lab05
             Transport.car.engine engine = new Transport.car.engine();
             Transport.train.vagon vagon = new Transport.train.vagon();
             Transport.car[] cars = new Transport.car[5];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < cars.Length; i++)
             {
                 cars[i] = new Transport.car();
             }
-
+            Transport.train[] trains = new Transport.train[5];
+            for (int i = 0; i < trains.Length; i++)
+            {
+                trains[i] = new Transport.train();
+            }
 
             car1.Move();
             Console.WriteLine("----");
@@ -292,7 +283,11 @@ namespace Lab05
             {
                 Controller.Adder(ref cars[i], ref container);
             }
-
+            for (int i = 0; i < cars.Length; i++)
+            {
+                Controller.Adder(ref trains[i], ref container);
+            }
+            Controller.findbySpeed(12, 1000,ref container);
         }
     }
 }
