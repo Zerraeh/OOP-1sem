@@ -1,4 +1,5 @@
-﻿using static Lab05.Program.Transport.car;
+﻿using System.ComponentModel;
+using static Lab05.Program.Transport.car;
 
 namespace Lab05
 {
@@ -15,6 +16,11 @@ namespace Lab05
             {
                 Console.WriteLine("Стоимость всего транспорта агенства: "+prices);
             }
+            public static void findbySpeed()
+            {
+
+            }
+
         }
 
         public interface transportMove
@@ -40,6 +46,8 @@ namespace Lab05
                 specs.price = rand.Next(500,1500);
                 Agency.costCount(specs.price);
             }
+            
+            
 
             public class car : Transport
             {
@@ -165,8 +173,27 @@ namespace Lab05
             }
 
         }
+        public class Container
+        {
+            public List<Object> cont = new List<Object>();
+        }
+        public static class Controller
+        {
+            public static void Adder(ref Transport a, ref Container container)
+            {
+                container.cont.Add(a);
+            }
+            public static void Adder(ref Transport.car a, ref Container container)
+            {
+                container.cont.Add(a);
+            }
+            public static void Adder(ref Transport.train a, ref Container container)
+            {
+                container.cont.Add(a);
+            }
+        }
 
-       
+
         static void Main(string[] args)
         {
             //11 вариант - Автомобиль, Поезд, Транспортное средство, Экспресс, Двигатель, Вагон
@@ -223,6 +250,13 @@ namespace Lab05
             //carsConsume(ref cars);
             sort(ref cars);
             Agency.CW();
+            Container container = new Container();
+
+            for (int i = 0; i < cars.Length; i++)
+            {
+                Controller.Adder(ref cars[i], ref container);
+            }
+
         }
     }
 }
