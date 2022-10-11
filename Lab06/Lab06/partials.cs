@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Lab06.Program.Program;
+using static Lab06.Program;
 
 namespace Lab06
 {
