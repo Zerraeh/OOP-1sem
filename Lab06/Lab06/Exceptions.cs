@@ -14,13 +14,13 @@ namespace Lab06
         }
         public string Error { get; }
     }
-    public class CarFuelConsumeExceptions : TransportExceptions
+    public class CarMultiplierExceptions : TransportExceptions
     {
-        public CarFuelConsumeExceptions(string message, string error) : base(message, "carFuelConsume")
+        public CarMultiplierExceptions(string message, string error) : base(message, "CarMult")
         {
-            
+
         }
-        public int fuelConsume { get; private set; }
+        public override string Message { get { return "OutOfRange"; } }
     }
 
     public class TrainSpeedExceptions : TransportExceptions
@@ -30,5 +30,29 @@ namespace Lab06
 
         }
         public int trainSpeed { get; private set; }
+    }
+
+    public class CarMoveException : TransportExceptions
+    {
+        public CarMoveException(string message, string error) : base(message, "carMovable")
+        {
+            error = Convert.ToString(speed);
+        }
+        public int speed { get; set; }
+    }
+    
+    public class expressTrainExpeption : TransportExceptions
+    {
+        public expressTrainExpeption(string message, string error) : base(message, "expressIsNot")
+        {
+
+        }
+    }
+    public class expressTrainExpeptionMove : TrainSpeedExceptions
+    {
+        public expressTrainExpeptionMove(string message, string error) : base(message, "expressIsNot")
+        {
+
+        }
     }
 }

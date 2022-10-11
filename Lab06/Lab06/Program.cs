@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-
+using System.Diagnostics;
 namespace Lab06
 {
         internal partial class Program
@@ -55,6 +55,12 @@ namespace Lab06
                         this.fuelConsume = rand.Next(3, 10);
                         this.speed = rand.Next(3, 10);
                     }
+                public car(int fuelCons)
+                {
+                   
+                    this.fuelConsume = fuelCons;
+                    Debug.Assert(this.fuelConsume != 0, "FuelCons can't be 0");
+                }
                     //public static void carsConsume(ref Transport.car[] cars)
                     // {
                     //         Random rand = new Random();
@@ -70,6 +76,7 @@ namespace Lab06
                     }
                     public override void Move()
                     {
+                    
                         Console.WriteLine("Автомобиль движется по дороге.");
                     }
                     public sealed class engine
@@ -224,23 +231,71 @@ namespace Lab06
                 Transport.train.Express expressTrain = new Transport.train.Express();
                 Transport.car.engine engine = new Transport.car.engine();
                 Transport.train.vagon vagon = new Transport.train.vagon();
-                Transport.car[] cars = new Transport.car[5];
+            Transport.car[] cars = new Transport.car[5];
+            try
+            {
                 for (int i = 0; i < cars.Length; i++)
                 {
-                    cars[i] = new Transport.car();
+                    cars[i] = new Transport.car(0);
                 }
-                Transport.train[] trains = new Transport.train[5];
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine("xd");
+                throw;
+            }
+
+            Transport.train[] trains = new Transport.train[5];
+
+            try
+            {
                 for (int i = 0; i < trains.Length; i++)
                 {
                     trains[i] = new Transport.train();
                 }
+            }
+            catch (TrainSpeedExceptions e)
+            {
 
+            }
+
+            try
+            {
                 car1.Move();
                 Console.WriteLine("----");
+            }
+            catch (CarMoveException e)
+            {
 
+            }
+
+
+            try
+            {
                 expressTrain.ExpressOrNot();
+                Console.WriteLine("----");
+            }
+            catch (expressTrainExpeption)
+            {
+
+                throw;
+            }
+
+            try
+            {
                 expressTrain.Move();
                 Console.WriteLine("----");
+            }
+            catch (expressTrainExpeptionMove)
+            {
+
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Finally all is works");
+            }
+                
 
                 engine.Work();
                 Console.WriteLine("----");
