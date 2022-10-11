@@ -242,6 +242,8 @@ namespace Lab06
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine("xd");
+                Logger.LogErrorinConsole(e);
+                Logger.LogErrorinFile(e);
                 throw;
             }
 
@@ -256,7 +258,8 @@ namespace Lab06
             }
             catch (TrainSpeedExceptions e)
             {
-
+                Logger.LogErrorinConsole(e);
+                Logger.LogErrorinFile(e);
             }
 
             try
@@ -266,7 +269,8 @@ namespace Lab06
             }
             catch (CarMoveException e)
             {
-
+                Logger.LogErrorinConsole(e);
+                Logger.LogErrorinFile(e);
             }
 
 
@@ -275,9 +279,10 @@ namespace Lab06
                 expressTrain.ExpressOrNot();
                 Console.WriteLine("----");
             }
-            catch (expressTrainExpeption)
+            catch (expressTrainExpeption e)
             {
-
+                Logger.LogErrorinConsole(e);
+                Logger.LogErrorinFile(e);
                 throw;
             }
 
@@ -286,9 +291,10 @@ namespace Lab06
                 expressTrain.Move();
                 Console.WriteLine("----");
             }
-            catch (expressTrainExpeptionMove)
+            catch (expressTrainExpeptionMove e)
             {
-
+                Logger.LogErrorinConsole(e);
+                Logger.LogErrorinFile(e);
                 throw;
             }
             finally
@@ -341,6 +347,7 @@ namespace Lab06
                     Controller.Adder(ref trains[i], ref container);
                 }
                 Controller.findbySpeed(12, 1000, ref container);
+            
             }
         }
 }
