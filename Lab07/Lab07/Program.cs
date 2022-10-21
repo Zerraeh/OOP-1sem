@@ -21,7 +21,7 @@ namespace Lab07
             void Show();
         }
 
-        public class Stroka <T> : Ioperations<T>
+        public class Stroka<T> : Ioperations<T>
         {
             public void Add()
             {
@@ -35,6 +35,7 @@ namespace Lab07
             {
                 Console.WriteLine("No more Strings :/");
             }
+            
             public class Production
             {
                 public int ID { get; set; }
@@ -166,8 +167,11 @@ namespace Lab07
 
         static void Main(string[] args)
         {
-            Stroka<string> stroka1 = new Stroka<string>();
-            Stroka<string> stroka2 = new Stroka<string>();
+            try
+            {
+                Stroka<string> stroka1 = new Stroka<string>();
+                Stroka<string> stroka2 = new Stroka<string>();
+            
 
 
             string str = Console.ReadLine();
@@ -192,7 +196,16 @@ namespace Lab07
             string strqw = "qw";
             strxd = strxd.summa(strqw);
             Console.WriteLine(strxd);
+            }
+            catch (Exception e)
+            {
 
+                throw e;
+            }
+            finally
+            {
+                Console.WriteLine("Done!!!");
+            }
         }
 
     }
