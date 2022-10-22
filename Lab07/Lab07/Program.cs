@@ -21,7 +21,7 @@ namespace Lab07
             void Show();
         }
 
-        public class Stroka<T> : Ioperations<T>
+        public class Stroka<T> : Ioperations<T> where T: class
         {
             public void Add()
             {
