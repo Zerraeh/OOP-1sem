@@ -5,8 +5,14 @@ using static Lab07.Program;
 
 namespace Lab07
 {
+
     internal class Program
     {
+        public static void FILE_SAVE(Program.Stroka<string> e)
+        {
+            using var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab07\Save.txt", true);
+            stream.WriteLine($"Info: {e.GetType()} - {e.Value}\n");
+        }
         /*Класс - Строка. Дополнительно перегрузить следующие 
 операции: < - удаление всех символов равных заданному; + 
 удаление нечетных символов; != сравнение длин строк; true - 
@@ -21,7 +27,7 @@ namespace Lab07
             void Show();
         }
 
-        public class Stroka<T> : Ioperations<T> where T: class
+        public class Stroka<T> : Ioperations<T> //where T: Transport
         {
             public void Add()
             {
@@ -196,6 +202,8 @@ namespace Lab07
             string strqw = "qw";
             strxd = strxd.summa(strqw);
             Console.WriteLine(strxd);
+            FILE_SAVE(stroka1);
+            FILE_SAVE(stroka2);
             }
             catch (Exception e)
             {
@@ -205,7 +213,9 @@ namespace Lab07
             finally
             {
                 Console.WriteLine("Done!!!");
+                
             }
+            
         }
 
     }
