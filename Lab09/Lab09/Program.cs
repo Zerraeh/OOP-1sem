@@ -52,7 +52,7 @@ namespace Lab09
             var tempCollection = new Stack<int>();
             Random random = new Random();
             int Size = 10;
-
+            int temp;
             //заполняем первую коллекцию
             for (int i = 0; i < Size; i++)
             {
@@ -62,7 +62,7 @@ namespace Lab09
             Console.WriteLine("\n\nВывод первой коллекции: ");
             for (int i = 0; i < Size; i++)
             {
-                int temp = firstCollection.Pop();
+                temp = firstCollection.Pop();
                 tempCollection.Push(temp);
                 Console.WriteLine($"{i}\t-\t{temp}");
             }
@@ -87,14 +87,14 @@ namespace Lab09
             //заполняем вторую коллекцию элементами первой
             for (int i = 0; i < Size; i++)
             {
-                int temp = tempCollection.Pop();
+                temp = tempCollection.Pop();
                 firstCollection.Push(temp);
                 secondCollection.Enqueue(temp);
             }
             Console.WriteLine("Вывод второй коллекции: ");
             for (int i = 0; i < Size; i++)
             {
-                int temp = secondCollection.Dequeue();
+                temp = secondCollection.Dequeue();
                 secondTempCollection.Enqueue(temp);
                 Console.WriteLine($"{i}\t-\t{temp}");
             }
@@ -104,7 +104,6 @@ namespace Lab09
             int findValue = 4;
             for (int i = 0; i < Size; i++)
             {
-                int temp;
                 temp = secondTempCollection.Dequeue();
                 secondCollection.Enqueue(temp);
                 if (temp == findValue)
@@ -141,6 +140,8 @@ namespace Lab09
 
         }
         #endregion
+
+
         static void Main(string[] args)
         {
             int n = 1;
