@@ -45,6 +45,21 @@ namespace Lab08
             string str1 = "str1 ,";
             string str2 = "str2 ,";
             StringCorrector.DoOperation(str1, str2, StringCorrector.NoComas);
+            string[] str = new string[5];
+            try
+            {
+                str[4] = "anything";
+                Console.WriteLine("It's OK");
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine("IndexOutOfRangeException");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception");
+            }
+
         }
 
     }
