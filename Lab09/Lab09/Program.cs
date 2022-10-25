@@ -34,22 +34,24 @@
                 +добавления для вашего типа коллекции). 
                 +d. Создайте вторую коллекцию (из таблицы выберите другой тип 
                 +коллекции) и заполните ее данными из первой коллекции.
-                e. Выведите вторую коллекцию на консоль. В случае не совпадения 
-                количества параметров (например, LinkedList<T> и Dictionary<Tkey, 
-                TValue>), при нехватке - генерируйте ключи, в случае избыточности –
-                оставляйте TValue.
+                +e. Выведите вторую коллекцию на консоль. В случае не совпадения 
+                +количества параметров (например, LinkedList<T> и Dictionary<Tkey, 
+                +TValue>), при нехватке - генерируйте ключи, в случае избыточности –
+                +оставляйте TValue.
                 f. Найдите во второй коллекции заданное значение
             */
             var firstCollection = new Stack<int>();
             var tempCollection = new Stack<int>();
             Random random = new Random();
             int Size = 5;
+
             //заполняем первую коллекцию
             for (int i = 0; i < Size; i++)
             {
                 firstCollection.Push(random.Next(i,10));
             }
             //выводим первую коллекцию
+            Console.WriteLine("\n\nВывод первой коллекции: ");
             for (int i = 0; i < Size; i++)
             {
                 int temp = firstCollection.Pop();
@@ -68,9 +70,11 @@
             {
                 tempCollection.Push(random.Next(i, 10));
             }
-            Size += n;
+            Size -= n;
+
             //2ая коллекция
             var secondCollection = new Queue<int>();
+            var secondTempCollection = new Queue<int>();
 
             //заполняем вторую коллекцию элементами первой
             for (int i = 0; i < Size; i++)
@@ -78,6 +82,13 @@
                 int temp = tempCollection.Pop();
                 firstCollection.Push(temp);
                 secondCollection.Enqueue(temp);
+            }
+            Console.WriteLine("Вывод второй коллекции: ");
+            for (int i = 0; i < Size; i++)
+            {
+                int temp = secondCollection.Dequeue();
+                secondTempCollection.Enqueue(temp);
+                Console.WriteLine($"{i}\t-\t{temp}");
             }
         }
     }
