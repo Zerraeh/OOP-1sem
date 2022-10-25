@@ -1,4 +1,7 @@
-﻿namespace Lab09
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+namespace Lab09
 {
     internal class Program
     {
@@ -114,23 +117,42 @@
 
 
         #region Третье задание
+        private static void changesOutput(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+                Console.WriteLine("\t--- Добавлен новый элемент");
+            else if (e.Action == NotifyCollectionChangedAction.Remove) Console.WriteLine("\t--- Удалён элемент");
+        }
         public static void Third()
         {
+            /*
+             Создайте объект наблюдаемой коллекции ObservableCollection<T>. Создайте 
+             произвольный метод и зарегистрируйте его на событие CollectionChange. 
+             Напишите демонстрацию с добавлением и удалением элементов. В качестве 
+             типа T используйте свой класс из таблицы.
+            */
+            var Collection = new ObservableCollection<int>();
+            Collection.CollectionChanged += changesOutput;
+            Collection.Add(5);
+            Collection.Add(6);
+            Collection.Add(7);
+            Collection.RemoveAt(2);
+            Collection.Remove(5);
 
         }
         #endregion
         static void Main(string[] args)
         {
             int n = 1;
-            Console.WriteLine($"\n\t--- Выполнение {n} задания: ");
+            Console.WriteLine($"\n\t\t--- Выполнение {n} задания: \n");
             First();
             n++;
 
-            Console.WriteLine($"\n\t--- Выполнение {n} задания: ");
+            Console.WriteLine($"\n\t\t--- Выполнение {n} задания: \n");
             Second();
             n++;
 
-            Console.WriteLine($"\n\t--- Выполнение {n} задания: ");
+            Console.WriteLine($"\n\t\t--- Выполнение {n} задания: \n");
             Third();
 
         } 
