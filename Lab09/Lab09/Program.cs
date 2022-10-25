@@ -43,20 +43,26 @@
             var firstCollection = new Stack<int>();
             var tempCollection = new Stack<int>();
             Random random = new Random();
-
-            for (int i = 0; i < 10; i++)
+            int Size = 5;
+            for (int i = 0; i < Size; i++)
             {
                 firstCollection.Push(random.Next(i,10));
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Size; i++)
             {
                 int temp = firstCollection.Pop();
                 tempCollection.Push(temp);
                 Console.WriteLine($"{i}\t-\t{temp}");
             }
 
-            
+            //Удаление n элементов:
+            int n = 4;
+            for (int i = 0; i < n; i++)
+            {
+                tempCollection.Pop();
+            }
+
             var secondCollection = new Queue<int>();
 
 
