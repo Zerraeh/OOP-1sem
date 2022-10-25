@@ -28,7 +28,7 @@
             /*
                 +Создайте универсальную коллекцию в соответствии с вариантом задания и 
                 +заполнить ее данными встроенного типа .Net (int, char,…).
-                a. Выведите коллекцию на консоль
+                +a. Выведите коллекцию на консоль
                 b. Удалите из коллекции n последовательных элементов
                 c. Добавьте другие элементы (используйте все возможные методы 
                 добавления для вашего типа коллекции). 
@@ -41,6 +41,22 @@
                 f. Найдите во второй коллекции заданное значение
             */
             var firstCollection = new Stack<int>();
+            var tempCollection = new Stack<int>();
+            Random random = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                firstCollection.Push(random.Next(i,10));
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                int temp = firstCollection.Pop();
+                tempCollection.Push(temp);
+                Console.WriteLine($"{i}\t-\t{temp}");
+            }
+
+            
             var secondCollection = new Queue<int>();
 
 
