@@ -10,7 +10,7 @@ namespace Lab06
     {
         public static void LogErrorinFile(Exception e)
         {
-            using var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab06\log.log", true);
+            using var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab06\Lab06\log.log", true);
             stream.WriteLine($"Time: {DateTime.Now}");
             stream.WriteLine($"Info: {e.GetType()} - {e.Message}\n");
         }

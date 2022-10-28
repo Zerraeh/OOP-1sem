@@ -3,6 +3,7 @@ using System.Net.Security;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using static Lab08.Program;
 
 
 namespace Lab08
@@ -12,21 +13,29 @@ namespace Lab08
 
         public class User
         {
-            public delegate void UpgradeHandler(string message);
+            public delegate void UpgradeHandler(string message, string issue);
             public event UpgradeHandler? UpgradeNotify;
 
-            public delegate void workHandler(string message);
+            UpgradeHandler UpgradeHandle = (str1, str2) => Console.WriteLine(str1 + "\t" + str2);
+            
+
+            public delegate void workHandler();
             public event workHandler? workNotify;
-            string str1;
-            //UpgradeHandler Upgrade = (str1) => UpgradeNotify?.Invoke("Улучшение!");
-            /*public void Upgrade()
+            int lvlCup = 0;
+            public void Upgrade()
             {
-                UpgradeNotify?.Invoke("Улучшение!");
-            }*/
+                UpgradeHandle($"{lvlCup}", "lvl");
+                Console.WriteLine("Upgrades, people, upgrades!");
+            }
 
             public void Work()
             {
-                workNotify?.Invoke("Работяга работает(");
+                lvlCup++;
+                if (lvlCup % 4 == 0)
+                {
+                    workNotify?.Invoke();
+                }
+               
             }
         }
         public static class StringCorrector
@@ -41,25 +50,19 @@ namespace Lab08
         }
         static void Main(string[] args)
         {
+
             User user = new User();
+
+            user.workNotify += user.Upgrade;
+            for (int i = 0; i < 8; i++)
+            {
+                user.Work();
+            }
+            
+            
             string str1 = "str1 ,";
             string str2 = "str2 ,";
             StringCorrector.DoOperation(str1, str2, StringCorrector.NoComas);
-            string[] str = new string[5];
-            try
-            {
-                str[4] = "anything";
-                Console.WriteLine("It's OK");
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                Console.WriteLine("IndexOutOfRangeException");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception");
-            }
-
         }
 
     }

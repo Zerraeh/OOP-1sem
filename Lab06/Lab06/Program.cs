@@ -234,7 +234,7 @@ namespace Lab06
             Transport.car[] cars = new Transport.car[5];
             try
             {
-                for (int i = 0; i < cars.Length; i++)
+                for (int i = 0; i < cars.Length+1; i++)
                 {
                     cars[i] = new Transport.car(0);
                 }
@@ -246,7 +246,7 @@ namespace Lab06
                 Logger.LogErrorinFile(e);
                 throw;
             }
-
+            
             Transport.train[] trains = new Transport.train[5];
 
             try
@@ -260,6 +260,7 @@ namespace Lab06
             {
                 Logger.LogErrorinConsole(e);
                 Logger.LogErrorinFile(e);
+                throw;
             }
 
             try
@@ -296,6 +297,10 @@ namespace Lab06
                 Logger.LogErrorinConsole(e);
                 Logger.LogErrorinFile(e);
                 throw;
+            }
+            catch
+            {
+
             }
             finally
             {

@@ -41,6 +41,17 @@ namespace Lab07
             {
                 Console.WriteLine("No more Strings :/");
             }
+
+            public class StrokaCollection<T>
+            {
+                   public List<Stroka<T>> _strings = new List<Stroka<T>>();
+                
+                public void Add(Stroka<T> str)
+                {
+                    _strings.Add(str);
+                }
+
+            }
             
             public class Production
             {
@@ -173,6 +184,8 @@ namespace Lab07
 
         static void Main(string[] args)
         {
+
+            Stroka<string>.StrokaCollection<string> Collection = new Stroka<string>.StrokaCollection<string>();
             try
             {
                 Stroka<string> stroka1 = new Stroka<string>();
