@@ -1,4 +1,6 @@
-﻿namespace Lab10
+﻿using System;
+
+namespace Lab10
 {
     internal class Program
     {
@@ -96,8 +98,31 @@
             }
             Console.WriteLine("\n\n");
         }
+
+        class Person
+        {
+            public string name { get; set; }
+            public string company { get; set; }
+            public Person(string name, string company)
+            {
+                this.name = name;
+                this.company = company;
+            }
+        }
+        class Company
+        {
+            public string name { get; set; }
+            public string language { get; set; }
+            public Company(string name, string language)
+            {
+                this.name = name;
+                this.language = language;
+            }
+        }
+
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             
         #region 1 задание
 
@@ -202,7 +227,7 @@
 
 
 
-            #region 4 задание
+        #region 4 задание
             Console.WriteLine($"---\tЗадание 4\t---\n\n");
             /*            Придумайте и напишите свой собственный запрос, в котором было 
                         бы не менее 5 операторов из разных категорий: условия, проекций, 
@@ -212,6 +237,35 @@
             bool kvantorov = trains.All(i => i.trainNumber >=0);
             IEnumerable<Train> razbieniya = trains.Skip(5);
             #endregion
+
+
+
+        #region 5 задание
+            Console.WriteLine($"---\tЗадание 5\t---\n\n");
+
+            Person[] people =
+            {
+                new Person("Tom", "Microsoft"), new Person("Sam", "Google"),
+                new Person("Bob", "JetBrains"), new Person("Mike", "Microsoft"),
+            };
+
+            Company[] companies =
+            {
+                new Company("Microsoft", "C#"),
+                new Company("Google", "Go"),
+                new Company("Oracle", "Java")
+            };
+
+
+            var joins = from p in people join c in companies on p.company equals c.name select new { name = p.name, company = c.name, language = c.language };
+            foreach (var item in joins)
+            {
+                Console.WriteLine($"{item.name} работает в {item.company} с языком программирования {item.language}");
+            }
+            #endregion
+
+
+        
         }
     }
 }
