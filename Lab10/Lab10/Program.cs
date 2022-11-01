@@ -161,8 +161,7 @@
 
 
 
-
-            #region 3 задание
+        #region 3 задание
             Console.WriteLine($"---\tЗадание 3\t---\n\n");
             //вариант 11
             /*Вывести:
@@ -199,6 +198,19 @@
             IEnumerable<Train> alphabetOrderTrains = from i in trains orderby i.stopPoint select i;
             foreacher(alphabetOrderTrains);
 
+            #endregion
+
+
+
+            #region 4 задание
+            Console.WriteLine($"---\tЗадание 4\t---\n\n");
+            /*            Придумайте и напишите свой собственный запрос, в котором было 
+                        бы не менее 5 операторов из разных категорий: условия, проекций, 
+                        упорядочивания, группировки, агрегирования, кванторов и разбиения*/
+            IEnumerable<IGrouping<string, Train>> sobstvenniyZapros = from i in trains where i.trainNumber >=5 orderby i.startTime group i by i.stopPoint;
+            int number = sobstvenniyZapros.Count();
+            bool kvantorov = trains.All(i => i.trainNumber >=0);
+            IEnumerable<Train> razbieniya = trains.Skip(5);
             #endregion
         }
     }
