@@ -7,7 +7,7 @@
             public string stopPoint;
             public int trainNumber;
             public DateTime startTime = new DateTime();
-            int[] places = { 0, 0, 0, 0 };
+            public int[] places = { 0, 0, 0, 0 };
 
 
             public const int MAXTRAINNUMBER = 200;
@@ -88,7 +88,7 @@
                 Console.WriteLine($"Информация о классе:\n Класс Trains используется для хранения информации о поездах и их особенностях");
             }
         }
-        public static void foreacher(IEnumerable<string> outStrings)
+        public static void foreacher(IEnumerable<object> outStrings)
         {
             foreach (var item in outStrings)
             {
@@ -148,7 +148,7 @@
 
 
         #region 2 задание
-            Console.WriteLine($"---\tЗадание 1\t---\n\n");
+            Console.WriteLine($"---\tЗадание 2\t---\n\n");
             Train[] trainArray = new Train[10];
             for (int i = 0; i < 10; i++)
             {
@@ -163,7 +163,42 @@
 
 
             #region 3 задание
-            
+            Console.WriteLine($"---\tЗадание 3\t---\n\n");
+            //вариант 11
+            /*Вывести:
+                список поездов, следующих до заданного пункта назначения;
+                список поездов, следующих до заданного пункта назначения и
+                отправляющихся после заданного часа;
+                максимальный поезд по количеству мест
+                последние пять поездов по времени отправления
+                упорядоченный список поездов по пункту назначения в
+                алфавитном порядке
+            */
+            string stopPointCheck = "xd";
+            DateTime timeCheck = DateTime.Now;
+            int placesCheck = 10;
+
+            Console.WriteLine($"Поезда останавливающиеся в [{stopPointCheck}]: ");
+            IEnumerable<Train> stopPointChecked = trains.Where<Train>(i => (i.stopPoint == stopPointCheck));
+            foreacher(stopPointChecked);
+
+            Console.WriteLine($"Поезда, останавливающиеся в [{stopPointCheck}] и отправляющиеся в [{timeCheck}]: ");
+            IEnumerable<Train> stopPointAndTimeChecked = trains.Where<Train>(i => (i.stopPoint == stopPointCheck && i.startTime == timeCheck));
+            foreacher(stopPointAndTimeChecked);
+
+            Console.WriteLine("Максимальное число мест у поезда: ");
+            int trainsByPlacesChecked = trains.Max(i => i.places[0] + i.places[1] + i.places[2] + i.places[3]);
+            Console.WriteLine(trainsByPlacesChecked);
+
+            Console.WriteLine($"Последние пять поездов по времени отправки в [{timeCheck}]: ");
+            IEnumerable<Train> lastFiveTrainsByStartTime = from i in trains where i.startTime == timeCheck orderby i select i;
+            lastFiveTrainsByStartTime = lastFiveTrainsByStartTime.TakeLast(5);
+            foreacher(lastFiveTrainsByStartTime);
+
+            Console.WriteLine("Упорядоченный список поездов по пункту назначения в алфавитном порядке: ");
+            IEnumerable<Train> alphabetOrderTrains = from i in trains orderby i.stopPoint select i;
+            foreacher(alphabetOrderTrains);
+
             #endregion
         }
     }
