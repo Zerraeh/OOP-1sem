@@ -20,6 +20,17 @@ namespace Lab11
         {
             return CurrentClass.Assembly.ToString();
         }
-        
+        // b - есть публичные конструкторы
+        public static bool HasPublicConstructors(Type CurrentClass)
+        {
+            foreach (var item in CurrentClass.GetConstructors(System.Reflection.BindingFlags.Public)
+            {
+                if (item.IsPublic)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
