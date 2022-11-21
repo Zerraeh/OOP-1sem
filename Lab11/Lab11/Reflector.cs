@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -13,9 +14,9 @@ namespace Lab11
         private static StreamReader? fileForInvoke = null;
 
 
-        private static readonly string fileForInformationPath = @"D:\_work\ООП\1sem\Lab11\Lab11\Reflection.txt";
-        private static readonly string fileForInvokePath = @"D:\_work\ООП\1sem\Lab11\Lab11";
+        
 
+        //1
 
         #region a - определение имени сборки, в которой определён класс
 
@@ -126,5 +127,99 @@ namespace Lab11
         }
 
         #endregion
+
+
+        //---
+        #region demo
+        private static readonly string fileForInformationPath = @"D:\_work\ООП\1sem\Lab11\Lab11\Reflection.txt";
+        private static readonly string fileForInvokePath = @"D:\_work\ООП\1sem\Lab11\Lab11";
+
+        public static void NameWrite(string CurrentClassName)
+        {
+            string? AssemblyName = GetAssemblyName(Type.GetType(CurrentClassName, true, true));
+            FileOpen();
+            fileForInformation?.WriteLine($"Current class:\t{CurrentClassName}\nCurrent assembly name:\t{AssemblyName}");
+            FileClose();
+        }
+
+        public static void ConstructorCheckWrite(string currentClassName)
+        {
+            bool? HasAnyPublicConstructors = HasPublicConstructors(Type.GetType(currentClassName, true, false));
+            FileOpen();
+            fileForInformation?.WriteLine($"Contains public constructors:\t{HasAnyPublicConstructors}");
+            FileClose();
+        }
+
+        public static void PublicMethodsEnumerationWrite(string currentClassName)
+        {
+            IEnumerable<string> publicMethods = new List<string>(GetPublicMethodsOfClass(Type.GetType(currentClassName, true, false)));
+            FileOpen();
+            fileForInformation?.WriteLine($"Public methods:");
+            foreach (var item in publicMethods)
+            {
+                fileForInformation?.WriteLine(item);
+            }
+            FileClose();
+        }
+
+        public static void FieldsAndPropsWrite(string currentClassName)
+        {
+            FileOpen();
+            IEnumerable<string> FieldsAndPropsList = new List<string>(GetFieldsAndPropsOfClass(Type.GetType(currentClassName, true, false)));
+            fileForInformation?.WriteLine($"Fields and Props:");
+            foreach (var item in FieldsAndPropsList)
+            {
+                fileForInformation?.WriteLine(item);
+            }
+            FileClose();
+        }
+
+        public static void InterfacesOfClassWrite(string currentClassName)
+        {
+            FileOpen();
+            IEnumerable<string> InterfacesList = new List<string>(GetAllInterfacesOfClass(Type.GetType(currentClassName, true, false)));
+            fileForInformation?.WriteLine($"Interfaces:");
+            foreach (var item in InterfacesList)
+            {
+                fileForInformation?.WriteLine(item);
+            }
+            FileClose();
+        }
+
+        public static void OutputDataByClassNameWrite(string currentClassName, string Parametr)
+        {
+            FileOpen();
+            IEnumerable<string> DataList = new List<string>(OutputDataByClassName(Type.GetType(currentClassName, true, false), Parametr));
+            fileForInformation?.WriteLine($"Methods with parametr {Parametr}:");
+            foreach (var item in DataList)
+            {
+                fileForInformation?.WriteLine(item);
+            }
+            FileClose();
+        }
+        #region работа с файлами(разделение каждого входа функций для удобства)
+        private static void FileOpen()
+        {
+            if(fileForInformationPath != null)
+            {
+                fileForInformation = new StreamWriter(fileForInformationPath, true);
+            }
+        }
+
+        private static void FileClose()
+        {
+            fileForInformation?.WriteLine("\n=\t=\t=\t=========\t=\t=\t=\n");
+            fileForInformation?.Close();
+        }
+        #endregion
+
+
+        #endregion
+        //---
+
+
+        //2
+
+
     }
 }
