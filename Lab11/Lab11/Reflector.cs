@@ -23,7 +23,7 @@ namespace Lab11
         // b - есть публичные конструкторы
         public static bool HasPublicConstructors(Type CurrentClass)
         {
-            foreach (var item in CurrentClass.GetConstructors(System.Reflection.BindingFlags.Public)
+            foreach (var item in CurrentClass.GetConstructors(System.Reflection.BindingFlags.Public))
             {
                 if (item.IsPublic)
                 {
@@ -32,5 +32,21 @@ namespace Lab11
             }
             return false;
         }
+        // c - извлекает все общедоступные публичные методы класса
+        // (возвращает IEnumerable<string>);
+        public static IEnumerable<string> GetPublicMethodsOfClass(Type CurrentClass)
+        {
+            List<string> publicMethods = new List<string>();
+            foreach (var item in CurrentClass.GetMethods(System.Reflection.BindingFlags.Public))
+            {
+                if (item.IsPublic)
+                {
+                    publicMethods.Add(item.ToString());
+                }
+            }
+            
+            return publicMethods;
+        }
+
     }
 }
