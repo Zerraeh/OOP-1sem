@@ -68,7 +68,10 @@ namespace Lab11
 
         #region d - получает информацию о полях и свойствах класса (возвращает IEnumerable<string>)
 
-
+        public static IEnumerable<string> GetFieldsAndPropsOfClass(Type CurrentClass)
+        {
+            return new List<string> { CurrentClass.GetFields(System.Reflection.BindingFlags.Public).ToString(), CurrentClass.GetFields(System.Reflection.BindingFlags.NonPublic).ToString(), CurrentClass.GetFields(System.Reflection.BindingFlags.Instance).ToString(), CurrentClass.GetProperties(System.Reflection.BindingFlags.Public).ToString(), CurrentClass.GetProperties(System.Reflection.BindingFlags.NonPublic).ToString(), CurrentClass.GetProperties(System.Reflection.BindingFlags.Instance).ToString() };
+        }
 
         #endregion
     }
