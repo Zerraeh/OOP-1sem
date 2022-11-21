@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Lab11
 {
@@ -74,5 +75,28 @@ namespace Lab11
         }
 
         #endregion
+
+
+
+        #region e - получает все реализованные классом интерфейсы (возвращает IEnumerable<string>);
+
+        public static IEnumerable<string> GetAllInterfacesOfClass(Type CurrentClass)
+        {
+            List<string> interfaces = new List<string>();
+            foreach (var item in CurrentClass.GetInterfaces())
+            {
+                if (item.IsPublic)
+                {
+                    interfaces.Add(item.IsPublic.ToString());
+                }
+            }
+            return interfaces;
+        }
+
+        #endregion
+
+
+
+
     }
 }
