@@ -1,8 +1,4 @@
-Info: Lab07.Program+Stroka`1[System.String] - System.Char[]
-
-Info: Lab07.Program+Stroka`1[System.String] - System.Char[]
-
-Info: Lab07.Program+Stroka`1[System.String] - System.Char[]
-
-Info: Lab07.Program+Stroka`1[System.String] - System.Char[]
-
+Info: Lab07.Program+Stroka`1[System.String]
+q
+Info: Lab07.Program+Stroka`1[System.String]
+w

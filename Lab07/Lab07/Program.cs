@@ -11,7 +11,9 @@ namespace Lab07
         public static void FILE_SAVE(Program.Stroka<string> e)
         {
             using var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab07\Save.txt", true);
-            stream.WriteLine($"Info: {e.GetType()} - {e.Value}\n");
+            stream.Write("Info: ");
+            stream.WriteLine(e.GetType());
+            stream.WriteLineAsync(e.Value);
         }
         /*Класс - Строка. Дополнительно перегрузить следующие 
 операции: < - удаление всех символов равных заданному; + 
@@ -194,10 +196,12 @@ namespace Lab07
 
 
             string str = Console.ReadLine();
+                string strxd = str;
             stroka1.Value = str.ToCharArray();
 
 
             str = Console.ReadLine();
+                string strqw = str;
             stroka2.Value = str.ToCharArray();
 
             Console.Clear();
@@ -211,8 +215,6 @@ namespace Lab07
             Console.WriteLine($"Разница длин строк : {raznValue}");
             Console.WriteLine($"Число элементов в строке stroka1 : {StatisticOperation.numberofElement(stroka1)}");
 
-            string strxd = "xd";
-            string strqw = "qw";
             strxd = strxd.summa(strqw);
             Console.WriteLine(strxd);
             FILE_SAVE(stroka1);
