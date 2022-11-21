@@ -15,12 +15,20 @@ namespace Lab11
         private static readonly string fileForInformationPath = @"D:\_work\ООП\1sem\Lab11\Lab11\Reflection.txt";
         private static readonly string fileForInvokePath = @"D:\_work\ООП\1sem\Lab11\Lab11";
 
-        // a - определение имени сборки, в которой определён класс
+
+        #region a - определение имени сборки, в которой определён класс
+
         public static string GetAssemblyName(Type CurrentClass)
         {
             return CurrentClass.Assembly.ToString();
         }
-        // b - есть публичные конструкторы
+
+        #endregion
+
+
+
+        #region b - есть публичные конструкторы
+
         public static bool HasPublicConstructors(Type CurrentClass)
         {
             foreach (var item in CurrentClass.GetConstructors(System.Reflection.BindingFlags.Public))
@@ -32,8 +40,14 @@ namespace Lab11
             }
             return false;
         }
-        // c - извлекает все общедоступные публичные методы класса
+
+        #endregion
+
+
+
+        #region c - извлекает все общедоступные публичные методы класса
         // (возвращает IEnumerable<string>);
+
         public static IEnumerable<string> GetPublicMethodsOfClass(Type CurrentClass)
         {
             List<string> publicMethods = new List<string>();
@@ -48,5 +62,14 @@ namespace Lab11
             return publicMethods;
         }
 
+        #endregion
+
+
+
+        #region d - получает информацию о полях и свойствах класса (возвращает IEnumerable<string>)
+
+
+
+        #endregion
     }
 }
