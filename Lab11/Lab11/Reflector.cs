@@ -97,6 +97,34 @@ namespace Lab11
 
 
 
+        #region f - выводит по имени класса имена методов, которые содержат заданный(пользователем) тип параметра(имя класса передается в качестве аргумента);
 
+        public static IEnumerable<string> OutputDataByClassName(Type CurrentClass, string Parameter)
+        {
+            List<string> Methods = new List<string>();
+            var currentClassMethods = CurrentClass.GetMethods();
+
+            foreach (var item in currentClassMethods)
+            {
+                var itemParams = item.GetParameters();
+
+                if (itemParams.Length == 0)
+                {
+                    if (Parameter == "")
+                    {
+                        Methods.Add(item.ToString());
+                        continue;
+                    }
+                }
+
+                if(itemParams.Any(param => (param.Name == Parameter)))
+                {
+                    Methods.Add(item.ToString());
+                }
+            }
+            return Methods;
+        }
+
+        #endregion
     }
 }
