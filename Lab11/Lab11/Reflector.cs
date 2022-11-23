@@ -129,6 +129,26 @@ namespace Lab11
         #endregion
 
 
+
+        #region g - метод Invoke, который вызывает метод класса, при этом значения 
+        //для его параметров необходимо 1) прочитать из текстового файла
+        //(имя класса и имя метода передаются в качестве аргументов) 2) 
+        //сгенерировать, используя генератор значений для каждого типа.
+        //Параметрами метода Invoke должны быть : объект, имя метода, массив параметров
+
+        public static void Invoke(string currentClassName, string currentMethodName)
+        {
+            Type? classType = Type.GetType(currentClassName,false, true);
+            object? obj = Activator.CreateInstance(classType);
+            var methodInfo = classType.GetMethod(currentMethodName);
+            fileForInvoke = new StreamReader(fileForInvokePath);
+            object? result = methodInfo.Invoke(obj, new object[] { int.Parse(fileForInvoke.ReadLine()), int.Parse(fileForInvoke.ReadLine()) });
+            fileForInvoke.Close();
+        }
+        #endregion
+
+
+
         //---
         #region demo
         private static readonly string fileForInformationPath = @"D:\_work\ООП\1sem\Lab11\Lab11\Reflection.txt";
