@@ -27,6 +27,18 @@ d.Продемонстрируйте работу класса*/
             Console.WriteLine($"Информация о файловой системе диска {disk} : {currentDisk.DriveType}\t-\t{currentDisk.DriveFormat}");
         }
 
+        public static void AllDrivesInfoShow()
+        {
+            Console.WriteLine("All drives info:\n");
 
+            foreach (var currentDisk in DriveInfo.GetDrives())
+            {
+                if(currentDisk.IsReady == false)
+                {
+                    continue;
+                }
+                Console.WriteLine($"Имя диска:\t{currentDisk.Name.ToString()}\nРазмер:\t{currentDisk.TotalSize}\nСвободное место:\t{currentDisk.AvailableFreeSpace}\nМетка тома:\t{currentDisk.VolumeLabel}");
+            }
+        }
     }
 }
