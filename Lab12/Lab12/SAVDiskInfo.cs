@@ -18,8 +18,8 @@ d.Продемонстрируйте работу класса*/
         public static void FreeSpaceShow(string disk)
         {
             var currentDisk = DriveInfo.GetDrives().Single(x=> x.Name == disk);
-            Console.WriteLine($"Свободное место на диске {disk}: {currentDisk.AvailableFreeSpace} байт...");
-            onUpdates($"[LOG] Свободное место на диске {disk}: {currentDisk.AvailableFreeSpace} байт...");
+            Console.WriteLine($"Свободное место на диске {currentDisk.Name}: {currentDisk.AvailableFreeSpace} байт...");
+            onUpdates($"[LOG] Свободное место на диске {currentDisk.Name}: {currentDisk.AvailableFreeSpace} байт...");
         }
 
         public static void FileSystemInfoShow(string disk)

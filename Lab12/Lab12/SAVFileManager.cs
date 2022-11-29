@@ -33,19 +33,22 @@ namespace Lab12
             onUpdates($"[LOG] Файловый менеджер создал директорию {currentDisk.Name}");
             File.Create(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt").Close();
 
-            var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt");
-
-            stream.WriteLine("Dirs: ");
-            foreach(var item in currentDisk.RootDirectory.GetDirectories()) 
+            using (var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt"))
             {
-                stream.WriteLine($"{item.Name}"); 
-            }
 
-            stream.WriteLine("Files: ");
+                stream.WriteLine("Dirs: ");
+                foreach (var item in currentDisk.RootDirectory.GetDirectories())
+                {
+                    stream.WriteLine($"{item.Name}");
+                }
 
-            foreach (var item in currentDisk.RootDirectory.GetFiles())
-            {
-                stream.WriteLine($"{item.Name}");
+                stream.WriteLine("Files: ");
+
+                foreach (var item in currentDisk.RootDirectory.GetFiles())
+                {
+                    stream.WriteLine($"{item.Name}");
+                }
+
             }
             File.Copy(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt", @"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfocopy.txt");
 
@@ -72,7 +75,7 @@ namespace Lab12
         public static void WinRAR(string pathFrom, string pathTo)
         {
             Directory.Delete(@"D:\_work\ООП\1sem\Lab12\Lab12\Unarchivive\");
-            if (!File.Exists($@"{ pathFrom}.zip"))
+            if (!File.Exists($@"{pathFrom}.zip"))
             {
                 ZipFile.CreateFromDirectory(pathFrom, $@"{pathFrom}.zip");
 
