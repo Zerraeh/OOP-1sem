@@ -11,7 +11,7 @@ namespace Lab12
     {
         public static void WriteLog(string message)
         {
-            using (var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab12\Lab12"))
+            using (var stream = new StreamWriter(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVlogfile.txt"))
             {
                 stream.WriteLine($"{DateTime.Now.ToString()}\t-\t{message}");
             }
