@@ -50,7 +50,7 @@
                 printer.IAmPrinting(item);
             }
 
-
+            //1
             Transport.car carRefContain = new Transport.car();
 
 
@@ -69,6 +69,24 @@
             CustomSerializer.SerializeToXML(car1);
             CustomSerializer.deSerializeToXML(ref carRefContain);
             Console.WriteLine($"Инфа по полученному элементу из xml:\t {carRefContain}");
+
+            //2
+
+            var transportCollection = new List<Transport>();
+            var transportCollectionFromFile = new List<Transport>();
+
+            transportCollection.Add(car1);
+            transportCollection.Add(train1);
+            transportCollection.Add(expressTrain);
+            transportCollection.Add(vagon);
+
+            CustomSerializer.SerializeToBinary(transportCollection);
+            CustomSerializer.deSerializeToBinary(ref transportCollectionFromFile);
+
+            foreach (var item in transportCollectionFromFile)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         
