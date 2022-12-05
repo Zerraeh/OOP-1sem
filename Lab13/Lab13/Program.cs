@@ -1,4 +1,6 @@
-﻿namespace Lab13
+﻿using System.Xml;
+
+namespace Lab13
 {
     internal class Program
     {
@@ -86,6 +88,28 @@
             foreach (var item in transportCollectionFromFile)
             {
                 Console.WriteLine(item);
+            }
+
+            //3
+            XmlDocument xmlDocument = new XmlDocument();
+            Console.WriteLine("3");
+            xmlDocument.Load(@"D:\_work\ООП\1sem\Lab13\Lab13\xml.xml");
+            var xroot = xmlDocument.DocumentElement;
+
+            var selectNodes = xroot.SelectNodes("*");
+
+            foreach (var item in selectNodes)
+            {
+                Console.WriteLine((item as XmlNode).Name);
+            }
+
+            Console.WriteLine("\n\n");
+
+            var namesNodes = xroot.SelectNodes("Name");
+
+            foreach (var item in namesNodes)
+            {
+                Console.WriteLine((item as XmlNode).InnerText);
             }
         }
 
