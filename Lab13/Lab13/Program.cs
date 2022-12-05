@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System.Xml.Linq;
 
 namespace Lab13
 {
@@ -92,7 +93,7 @@ namespace Lab13
 
             //3
             XmlDocument xmlDocument = new XmlDocument();
-            Console.WriteLine("3");
+
             xmlDocument.Load(@"D:\_work\ООП\1sem\Lab13\Lab13\xml.xml");
             var xroot = xmlDocument.DocumentElement;
 
@@ -110,6 +111,46 @@ namespace Lab13
             foreach (var item in namesNodes)
             {
                 Console.WriteLine((item as XmlNode).InnerText);
+            }
+
+            //4
+            XDocument xDoc = new XDocument();
+            XElement element = new XElement("element1");
+            XElement root = new XElement("data");
+            XElement myElement;
+            XElement id;
+            XAttribute day;
+
+            myElement = new XElement("myElement");
+            id = new XElement("id");
+            id.Value = "5";
+            day = new XAttribute("day", "18");
+
+
+            myElement.Add(id);
+            myElement.Add(day);
+            root.Add(myElement);
+
+            myElement = new XElement("myElement");
+            id = new XElement("id");
+            id.Value = "7";
+            day = new XAttribute("day", "19");
+
+
+            myElement.Add(id);
+            myElement.Add(day);
+            root.Add(myElement);
+
+            xDoc.Add(root);
+            xDoc.Save(@"D:\_work\ООП\1sem\Lab13\Lab13\4xml.xml");
+
+            Console.WriteLine("Поиск по id:");
+            string? strId = Console.ReadLine();
+            var elems = root.Elements("myElement");
+
+            foreach (var item in elems)
+            {
+                if (item.Attribute("id").Value == strId) Console.WriteLine(item.Value);
             }
         }
 
