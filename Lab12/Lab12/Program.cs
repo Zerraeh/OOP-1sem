@@ -35,6 +35,7 @@ namespace Lab12
             SAVFileManager.DiskInspect(@"D:\");
             SAVFileManager.Copy(@"D:\_work\ООП\1sem\Lab12\Lab12\", ".txt");
             SAVFileManager.WinRAR(@"D:\_work\ООП\1sem\Lab12\Lab12\arg", @"D:\_work\ООП\1sem\Lab12\Lab12\uarg");
+            
         }
     }
 }

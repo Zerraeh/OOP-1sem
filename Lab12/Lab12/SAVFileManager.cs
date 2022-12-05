@@ -52,7 +52,7 @@ namespace Lab12
             }
             File.Copy(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt", @"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfocopy.txt");
 
-            File.Delete(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfo.txt");
+            File.Delete(@"D:\_work\ООП\1sem\Lab12\Lab12\SAVInspect\SAVdirinfox.txt");
 
         }
         public static void Copy(string path, string ext)
