@@ -23,7 +23,7 @@ namespace Lab13
         public static void SerializeToBinary<T>(T obj) where T : class
         {
             var binaryEdit = new BinaryFormatter();
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\bin.bin", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\bin.bin", FileMode.OpenOrCreate))
             {
                 binaryEdit.Serialize(fileStream, obj);
             }
@@ -31,7 +31,7 @@ namespace Lab13
         public static void deSerializeToBinary<T>(ref T obj) where T : class
         {
             var binaryEdit = new BinaryFormatter();
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\bin.bin", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\bin.bin", FileMode.OpenOrCreate))
             {
                 obj = binaryEdit.Deserialize(fileStream) as T;
             }
@@ -42,16 +42,16 @@ namespace Lab13
         public static void SerializeToSoap<T>(T obj) where T : class
         {
             var soapEdit = new SoapFormatter();
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\soap.soap", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\soap.soap", FileMode.OpenOrCreate))
             {
                 soapEdit.Serialize(fileStream, obj);
             }
         }
 
-        public static void deSerializeToSoap<T>(T obj) where T : class
+        public static void deSerializeToSoap<T>(ref T obj) where T : class
         {
             var soapEdit = new SoapFormatter();
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\soap.soap", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\soap.soap", FileMode.OpenOrCreate))
             {
                 soapEdit.Serialize(fileStream, obj);
             }
@@ -64,7 +64,7 @@ namespace Lab13
         {
             string jsonStr = JsonConvert.SerializeObject(obj, Formatting.Indented);
             var jsonFormat = new DataContractJsonSerializer(typeof(T));
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\JSON.json", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\JSON.json", FileMode.OpenOrCreate))
             {
                 jsonFormat.WriteObject(fileStream, obj);
             }
@@ -74,7 +74,7 @@ namespace Lab13
             var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
             var jsonFormat = new DataContractJsonSerializer(typeof(T));
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\JSON.json", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\JSON.json", FileMode.OpenOrCreate))
             {
                 obj = (T)jsonFormat.ReadObject(fileStream);
             }
@@ -86,7 +86,7 @@ namespace Lab13
         public static void SerializeToXML<T>(T obj) where T : class
         {
             var XMLEdit = new XmlSerializer(typeof(T));
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\xml.xml", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\xml.xml", FileMode.OpenOrCreate))
             {
                 XMLEdit.Serialize(fileStream, obj);
             }
@@ -94,7 +94,7 @@ namespace Lab13
         public static void deSerializeToXML<T>(ref T obj) where T : class
         {
             var XMLEdit = new XmlSerializer(typeof(T));
-            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab04\Lab04\xml.xml", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(@"D:\_work\ООП\1sem\Lab13\Lab13\xml.xml", FileMode.OpenOrCreate))
             {
                 obj = XMLEdit.Deserialize(fileStream) as T;
             }

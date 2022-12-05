@@ -52,11 +52,23 @@
 
 
             Transport.car carRefContain = new Transport.car();
+
+
             CustomSerializer.SerializeToBinary(car1);
             CustomSerializer.deSerializeToBinary(ref carRefContain);
             Console.WriteLine($"Инфа по полученному элементу из bin:\t {carRefContain}");
 
+            CustomSerializer.SerializeToSoap(car1);
+            CustomSerializer.deSerializeToSoap(ref carRefContain);
+            Console.WriteLine($"Инфа по полученному элементу из soap:\t {carRefContain}");
 
+            CustomSerializer.SerializeToJSON(car1);
+            CustomSerializer.deSerializeToJSON(ref carRefContain);
+            Console.WriteLine($"Инфа по полученному элементу из json:\t {carRefContain}");
+
+            CustomSerializer.SerializeToXML(car1);
+            CustomSerializer.deSerializeToXML(ref carRefContain);
+            Console.WriteLine($"Инфа по полученному элементу из xml:\t {carRefContain}");
         }
 
         
