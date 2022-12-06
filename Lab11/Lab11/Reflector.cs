@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Lab09;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -240,6 +242,13 @@ namespace Lab11
 
         //2
 
+        public static object Create(int width, int height)
+        {
+            Type type = typeof(GeometricFigure);
 
+            ConstructorInfo info = type.GetConstructor(new Type[] { typeof(int), typeof(int) });
+            object obj = info.Invoke(new object[] { width, height });
+            return obj;
+        }
     }
 }
