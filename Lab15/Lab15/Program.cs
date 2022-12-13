@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
+using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 
@@ -29,7 +30,39 @@ namespace Lab15
             Stopwatch на нескольких прогонах.*/
         static void Raz()
         {
+            Stopwatch stopwatch= new Stopwatch();
             
+
+            Task task = new Task<uint>( () => CountColvoOfSimpleNumbers(10));
+            Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}\n---");
+            stopwatch.Start();
+            task.Start();
+
+            Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}\n---");
+            task.Wait();
+            stopwatch.Stop();
+            Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}");
+            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine($"Метод отработал {stopwatch.ElapsedMilliseconds} мс...");
+            Console.WriteLine("\n\n\n");
+        }
+
+        private static uint CountColvoOfSimpleNumbers(uint enumerationStop)
+        {
+            List<uint> numbers = new List<uint>();
+            for (uint i = 2u; i < enumerationStop; i++)
+            {
+                numbers.Add(i);
+            }
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                for (uint j = 0; j < enumerationStop; j++)
+                {
+                    numbers.Remove(numbers[i] * j);
+                }
+            }
+            return (uint)numbers.Count;
         }
         #endregion
 
@@ -38,13 +71,36 @@ namespace Lab15
             CancellationToken и отмените задачу*/
         static void Dva()
         {
-            
+            CancellationToken cancellationToken = new CancellationToken();
+
+            Task secondTask = Task.Factory.StartNew(CountColvoOfSimpleNumbersWithCancelation, cancellationToken);
+        }
+        private static uint CountColvoOfSimpleNumbersWithCancelation(object obj)
+        {
+            List<uint> numbers = new List<uint>();
+            var token = (CancellationToken)obj;
+            for (uint i = 2u; i < 50; i++)
+            {
+                numbers.Add(i);
+            }
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("Canceled request");
+                    token.ThrowIfCancellationRequested();
+                    return 0;
+                }
+                for (var j = 2u; j < 1000; j++) numbers.Remove(numbers[i] * j);
+            }
+            return (uint)numbers.Count;
         }
         #endregion
 
         #region Задание 3
-            /*Создайте три задачи с возвратом результата и используйте их для
-            выполнения четвертой задачи.Например, расчет по формуле*/
+        /*Создайте три задачи с возвратом результата и используйте их для
+        выполнения четвертой задачи.Например, расчет по формуле*/
         static void Tri()
         {
             
