@@ -46,7 +46,7 @@ namespace Lab14
             Вызовите методы управления потоком(запуск, приостановка, возобновление и т.д.) Во
             время выполнения выведите информацию о статусе потока, имени, приоритете, числовой
             идентификатор и т.д*/
-            /*void count(object pnum)
+            void count(object pnum)
             {
                 int num = (int)pnum;
                 for (int i = 1; i < num; i++)
@@ -55,11 +55,18 @@ namespace Lab14
                     Thread.Sleep(100);
                 }
             }
-            Thread countThread = new Thread(count);
+            Thread countThread = new Thread(new ParameterizedThreadStart(count));
             countThread.Name = "myThread";
-            countThread.Start();*/
-            int a = 23 % 3 + 1;
-            Console.WriteLine(a);
+            countThread.Start(9);
+            Thread.Sleep(1000);
+            countThread.Suspend();
+
+            Console.WriteLine($"Имя: {countThread.Name}\nСтатус: {countThread.ThreadState}\nПриоритет: {countThread.Priority}\nЧисловой идентификатор: {countThread.ManagedThreadId}");
+
+            countThread.Resume();
+
+            Thread.Sleep(500);
+
             #endregion
 
             #region 4th
@@ -70,12 +77,24 @@ namespace Lab14
             чтобы
             i.выводились сначала четные, потом нечетные числа
             ii.последовательно выводились одно четное, другое нечетное.*/
+            XD.OneTwoThread();
+            Thread.Sleep(500);
+            Console.WriteLine("---");
+            XD.MultipleThread();
+            Thread.Sleep(500);
+            Console.WriteLine("\n");
 
             #endregion
 
             #region 5th
             //Придумайте и реализуйте повторяющуюся задачу на основе класса Timer
-
+            TimerCallback timerCallback = new TimerCallback(objforCallback);
+            Timer timer = new Timer(timerCallback, null, 0, 1000);
+            Thread.Sleep(500);
+            void objforCallback(object obj)
+            {
+                Console.WriteLine(DateTime.Now);
+            }
             #endregion
         }
     }
