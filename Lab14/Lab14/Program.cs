@@ -88,13 +88,15 @@ namespace Lab14
 
             #region 5th
             //Придумайте и реализуйте повторяющуюся задачу на основе класса Timer
-            TimerCallback timerCallback = new TimerCallback(objforCallback);
-            Timer timer = new Timer(timerCallback, null, 0, 1000);
-            Thread.Sleep(500);
             void objforCallback(object obj)
             {
                 Console.WriteLine(DateTime.Now);
             }
+
+            TimerCallback timerCallback = new TimerCallback(objforCallback);
+            Timer timer = new Timer(timerCallback, null, 0, 1000);
+            Thread.Sleep(500);
+            
             #endregion
         }
     }
