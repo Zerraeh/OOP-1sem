@@ -14,6 +14,8 @@
             Reflector.InterfacesOfClassWrite("Lab09.GeometricFigure");
             Reflector.OutputDataByClassNameWrite("Lab09.GeometricFigure","currentClassName");
             Reflector.Invoke("Lab09.GeometricFigure", "dosomething");
+
+            Reflector.Create(5, 6);
             #endregion
         }
     }
