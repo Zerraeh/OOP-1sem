@@ -1,9 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
+using System.Threading;
 using System.Threading.Tasks;
-
 namespace Lab15
 {
     internal class Program
@@ -16,7 +17,7 @@ namespace Lab15
             Chetire();
             Pyat();
             Shest();
-            Sem();
+            //Sem();
             Vosem();
 
         }
@@ -33,10 +34,12 @@ namespace Lab15
             Stopwatch stopwatch= new Stopwatch();
             
 
-            Task task = new Task<uint>( () => CountColvoOfSimpleNumbers(10));
+            Task<uint> task = new Task<uint>( () => CountColvoOfSimpleNumbers(10));
+            
             Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}\n---");
             stopwatch.Start();
             task.Start();
+            
 
             Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}\n---");
             task.Wait();
@@ -44,7 +47,7 @@ namespace Lab15
             Console.WriteLine($"Task ID: {task.Id}\n Task status: {task.Status}");
             Console.WriteLine("----------------------------------------------");
             Console.WriteLine($"Метод отработал {stopwatch.ElapsedMilliseconds} мс...");
-            Console.WriteLine("\n\n\n");
+            Console.WriteLine($"{task.Result}\n\n\n"); // -- Не работает св-во Result
         }
 
         private static uint CountColvoOfSimpleNumbers(uint enumerationStop)
@@ -71,9 +74,24 @@ namespace Lab15
             CancellationToken и отмените задачу*/
         static void Dva()
         {
-            CancellationToken cancellationToken = new CancellationToken();
+            CancellationTokenSource cancellationTokenSource= new CancellationTokenSource();
 
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
             Task secondTask = Task.Factory.StartNew(CountColvoOfSimpleNumbersWithCancelation, cancellationToken);
+            
+            try
+            {
+                cancellationTokenSource.Cancel();
+                secondTask.Wait();
+            }
+            catch (AggregateException e)
+            {
+
+                if (secondTask.IsCanceled)
+                {
+                    Console.WriteLine($"Задача {secondTask.Id} отменена..");
+                }
+            }
         }
         private static uint CountColvoOfSimpleNumbersWithCancelation(object obj)
         {
@@ -89,7 +107,7 @@ namespace Lab15
                 if (token.IsCancellationRequested)
                 {
                     Console.WriteLine("Canceled request");
-                    token.ThrowIfCancellationRequested();
+                    //token.ThrowIfCancellationRequested();
                     return 0;
                 }
                 for (var j = 2u; j < 1000; j++) numbers.Remove(numbers[i] * j);
@@ -103,7 +121,18 @@ namespace Lab15
         выполнения четвертой задачи.Например, расчет по формуле*/
         static void Tri()
         {
-            
+            Task<int> sum = new Task<int>(() => new Random().Next() + new Random().Next());
+            Task<int> mul = new Task<int>(() => new Random().Next() * new Random().Next());
+            Task<int> slash = new Task<int>(() => new Random().Next() / new Random().Next());
+            sum.Start();
+            mul.Start();
+            slash.Start();
+
+            sum.Wait();
+            mul.Wait();
+            slash.Wait();
+
+            Task<int> vichisleniya = new Task<int>(() => sum.Result + mul.Result + slash.Result);
         }
         #endregion
 
@@ -114,8 +143,18 @@ namespace Lab15
             2) На основе объекта ожидания и методов GetAwaiter(),GetResult();*/
         static void Chetire()
         {
-            
+            //1
+            Task<int> sum = new Task<int>(() => new Random().Next() + new Random().Next());
+            Task showSum = sum.ContinueWith(t =>  Console.WriteLine(sum.Result));
+            sum.Start();
 
+            //2
+            Task<int> getAwaiterAndResult = Task.Run(() => sum.Result + new Random().Next());
+
+            TaskAwaiter<int> awaiter = getAwaiterAndResult.GetAwaiter();
+
+            awaiter.OnCompleted(async () => { int res = awaiter.GetResult(); Console.WriteLine("Результат sum: "+res); });
+            Console.WriteLine(awaiter.GetResult());
         }
         #endregion
 
@@ -128,7 +167,34 @@ namespace Lab15
             обычными циклами*/
         static void Pyat()
         {
-            
+            int[] array1 = new int[1000000];
+            int[] array2 = new int[1000000];
+            int[] array3 = new int[1000000];
+
+            Stopwatch st = new Stopwatch();
+
+            st.Start();
+
+            void CreateElems(int i)
+            {
+                array1[i] = 1;
+                array2[i] = 2;
+                array3[i] = 3;
+            }
+            Parallel.For(0, 1000000, CreateElems);
+            st.Stop();
+            Console.WriteLine($"Parallel справился за: {st.ElapsedMilliseconds} ms");
+
+            st.Restart();
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                array1[i] = 1;
+                array2[i] = 2;
+                array3[i] = 3;
+            }
+            st.Stop();
+            Console.WriteLine($"For справился за: {st.ElapsedMilliseconds} ms");
         }
         #endregion
 
@@ -137,7 +203,36 @@ namespace Lab15
             операторов.*/
         static void Shest()
         {
+            int[] array1 = new int[1000000];
+            int[] array2 = new int[1000000];
+            int[] array3 = new int[1000000];
 
+            Stopwatch st = new Stopwatch();
+            st.Start();
+            Parallel.Invoke(
+                () => 
+                {
+                    for (int i = 0; i < 1000000; i++)
+                    {
+                        array1[i] = 1;
+                    }
+                },
+                () => 
+                {
+                    for (int i = 0; i < 1000000; i++)
+                    {
+                        array2[i] = 2;
+                    }
+                },
+                () => 
+                {
+                    for (int i = 0; i < 1000000; i++)
+                    {
+                        array3[i] = 3;
+                    }
+                });
+            st.Stop();
+            Console.WriteLine($"Parallel.Invoke справился за {st.ElapsedMilliseconds} ms");
         }
         #endregion
 
@@ -151,7 +246,201 @@ namespace Lab15
             выводите наименования товаров на складе.*/
         static void Sem()
         {
+            BlockingCollection<string> bc = new BlockingCollection<string>(5);
 
+            Task[] consumers = new Task[10]
+            {
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(200);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(300);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(250);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(150);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(400);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(350);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(300);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(250);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(700);
+                        bc.Take();
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(500);
+                        bc.Take();
+                    }
+                }
+                ),
+            };
+
+            Task[] sellers = new Task[5]
+            {
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(350);
+                        bc.Add("Кофемолка");
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(700);
+                        bc.Add("Чайник");
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(750);
+                        bc.Add("Сковорода");
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(900);
+                        bc.Add("Холодильник");
+                    }
+                }
+                ),
+                new Task(() =>
+                {
+                    while(true)
+                    {
+                        Thread.Sleep(200);
+                        bc.Add("Кофеварка");
+                    }
+                }
+                ),
+            };
+
+            
+                foreach (var i in sellers)
+                {
+                    if (i.Status != TaskStatus.Running)
+                    {
+                        i.Start();
+                    }
+                }
+                foreach (var i in consumers)
+                {
+                    if (i.Status != TaskStatus.Running)
+                    {
+                        i.Start();
+                    }
+                }
+            
+            void Stopper()
+            {
+                foreach (var i in sellers)
+                {
+                    if (i.Status != TaskStatus.Running)
+                    {
+                        i.Wait();
+                    }
+                }
+                foreach (var i in consumers)
+                {
+                    if (i.Status != TaskStatus.Running)
+                    {
+                        i.Wait();
+                    }
+                }
+            }
+
+            int count = 1;
+            bool flag = true;
+            while (flag)
+            {
+                if (bc.Count != count && bc.Count != 0)
+                {
+                    count = bc.Count;
+                    Thread.Sleep(500);
+                    Console.WriteLine("Склад:");
+                    foreach (var item in bc)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+                
+            }
         }
         #endregion
 
@@ -160,7 +449,25 @@ namespace Lab15
             метода.*/
         static void Vosem()
         {
+            void Count1000minus7()
+            {
+                int tis = 1000;
+                int result = tis;
+                while (result > 3)
+                {
+                    result -= 7;
+                    Console.WriteLine($"{tis} - 7 = {result}");
+                }
+                
+            }
 
+            async void Count1000minus7async()
+            {
+                await Task.Run(() => Count1000minus7());
+            }
+            Count1000minus7();
+            Console.WriteLine("-");
+            Count1000minus7async();
         }
         #endregion
     }
