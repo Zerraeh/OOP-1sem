@@ -31,5 +31,11 @@ namespace Lab17_20
         {
             
         }
+
+        // adapter
+        public void RecieveTicket(ITicket get)
+        {
+            Console.WriteLine("Билет отправлен по почте");
+        }
     }
 }
