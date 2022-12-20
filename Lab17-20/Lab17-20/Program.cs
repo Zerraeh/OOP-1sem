@@ -119,6 +119,19 @@ namespace Lab17_20
             Reader reader = new Reader();
             reader.SeeBooks(library);
             Console.WriteLine("-------------------");
+
+            // --- Memento --- //
+            MemBook memBook = new MemBook();
+            memBook.ReadNext();
+            PageHistory page = new PageHistory();
+
+            page.BookMementoStack.Push(memBook.SavePage());
+
+            memBook.ReadNext();
+
+            memBook.LoadPage(page.BookMementoStack.Pop());
+
+            memBook.ReadNext();
         }
 
 
