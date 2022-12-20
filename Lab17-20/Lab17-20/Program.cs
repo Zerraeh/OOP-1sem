@@ -51,6 +51,15 @@ namespace Lab17_20
             fClient.BuyTicket();
             fClient.GoFlight();
             Console.WriteLine("-------------------");
+
+
+            // --- builder --- //
+            Console.WriteLine("-------------------");
+            BClient bClient = new BClient();
+            bClient.BuyTicket();
+            Console.WriteLine("-------------------");
+
+
         }
     }
 }
