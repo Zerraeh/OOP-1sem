@@ -55,11 +55,17 @@ namespace Lab17_20
 
             // --- builder --- //
             Console.WriteLine("-------------------");
-            BClient bClient = new BClient();
-            bClient.BuyTicket();
+            //BClient bClient = new BClient();
+            //bClient.BuyTicket();
             Console.WriteLine("-------------------");
 
-
+            // --- singleton --- //
+            App app = new App();
+            string[] opt1 = { "black", "Google Sans", "7pt" };
+            app.SetOptions(opt1);
+            string[] opt2 = { "green", "Times", "10pt" };
+            app.settings = Settings.getInstance(opt2);
+            Console.WriteLine(app.settings.SettingsShow());
         }
     }
 }
